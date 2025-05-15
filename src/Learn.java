@@ -14,8 +14,9 @@ import java.util.Scanner;
  */
 public class Learn {
     private String[] informations;
+    private String[] topics;
     
-    public Learn(String topic){
+    public Learn(){
         
     }
     
@@ -34,9 +35,11 @@ public class Learn {
         
         try {
             Scanner scanner = new Scanner(new File(fileName));
+            int i = 0;
             while (scanner.hasNext()) {
                 String data = scanner.nextLine();
                 String [] info = data.split(",");
+                
             }
         } catch(IOException e){
             System.out.println("Error");
@@ -45,3 +48,5 @@ public class Learn {
     }
    
 }
+
+
