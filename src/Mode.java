@@ -9,21 +9,21 @@
  */
 public class Mode {
     private Quiz quiz;
-    private Learn learn;
+    //private Learn learn;
+    private boolean quizMode;
+    private boolean learnMode;
     
-    public Mode(boolean quiz, boolean learn) {
-        this.quiz = quiz;
-        this.learn = learn;
+    public Mode(boolean quizMode, boolean learnMode) {
+        this.quizMode = quizMode;
+        this.learnMode = learnMode;
     }
     
     public void setMode() {
-        if (quiz = true) {
-            new Quiz().setVisible(true);
-            this.setVisible(false);
-        } else {
-            new Learn().setVisible(true);
-            this.setVisible(false);
+        if (quizMode) {
+            this.quiz = new Quiz();
+//        } if (learnMode) {
+//            this.learn = new Learn();
         }
+    //}
     }
-
 }

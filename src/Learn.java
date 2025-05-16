@@ -12,12 +12,12 @@ import java.util.Scanner;
  *
  * @author 345700744
  */
-public class Learn {
+public class Learn extends Mode{
     private String[] informations;
     private String[] topics;
     
     public Learn(){
-        
+         super(false, true);
     }
     
     public String [] getInformation(String fileName){
@@ -36,9 +36,12 @@ public class Learn {
         try {
             Scanner scanner = new Scanner(new File(fileName));
             int i = 0;
+            String [] info = new String[lineCount];
             while (scanner.hasNext()) {
                 String data = scanner.nextLine();
-                String [] info = data.split(",");
+                info[i] = data;
+                System.out.println(info[i]);
+                i++;
                 
             }
         } catch(IOException e){
