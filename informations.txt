@@ -1,23 +1,33 @@
-Check If the Source Provides Evidence
-Start by asking:
+Critical thinking skills for evaluating news
+///
+1. Check If the Source Provides Evidence
+///
+2. Start by asking:
 • Who wrote it? Is the author an expert in the field?
 • What are they saying? Does it sound reasonable?
 • When was it published? Is the information up to date?
 • Where was it published? Is it a trustworthy source?
-• How does it make you feel? Be cautious if it strongly provokes anger or fear.,
-Warning Signs of Misinformation,
-• Sensational or clickbait headlines,
+• How does it make you feel? Be cautious if it strongly provokes anger or fear.
+///
+3. Warning Signs of Misinformation
+• Sensational or clickbait headlines
 • Lack of evidence
-• Unverified reports,
-Cross-Reference Information,
+• Unverified reports
+///
+4. Cross-Reference Information
 • Look at different news sites
 • Check for consistency
-• Compare interpretations,
-Use Fact-Checking Websites,
+• Compare interpretations
+///
+5. Use Fact-Checking Websites
 • Snopes
 • FactCheck.org
-• PolitiFact,
-Techniques used in fake news and misinformation,
-• Using old photos to mislead people
-• AI-generated fake images and videos
-• Emotional manipulation to spread misinformation
+• PolitiFact
+///
+Techniques used in fake news and misinformation
+///
+1. Using old photos to mislead people
+///
+2. AI-generated fake images and videos
+///
+3. Emotional manipulation to spread misinformation

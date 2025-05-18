@@ -9,7 +9,7 @@
  */
 public class Mode {
     private Quiz quiz;
-    //private Learn learn;
+    private Learn learn;
     private boolean quizMode;
     private boolean learnMode;
     
@@ -21,9 +21,17 @@ public class Mode {
     public void setMode() {
         if (quizMode) {
             this.quiz = new Quiz();
-//        } if (learnMode) {
-//            this.learn = new Learn();
+      } if (learnMode) {
+          this.learn = new Learn();
         }
-    //}
+    }
+    public void startMode() {
+        if (quizMode) {
+            System.out.println("Quiz Mode Activated!");
+        } else if (learnMode) {
+            System.out.println("Learn Mode Activated!");
+        } else {
+            System.out.println("No mode selected.");
+        }
     }
 }
