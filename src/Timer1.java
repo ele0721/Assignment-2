@@ -7,59 +7,64 @@
  *
  * @author elena
  */
-//import javax.swing.Timer;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//
-//public class Timer1 {
-//    private int countdown;
-//    private int initialTime;
-//    private Timer timer;
-//    private javax.swing.JLabel jLabel1;
-//    
-//public Timer1() {
-//        this.countdown = initialTime;
-//        this.jLabel1 = jLabel1;
-//        
-//        // Create and configure the timer without a label
-//        timer = new Timer(1000, new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                countdown--;
-//                updateDisplay();
-//                
-//                // Stop when countdown reaches zero
-//                if (countdown <= 0) {
-//                    timer.stop();
-//                    if (jLabel1 != null) {
-//                        jLabel1.setText("Time's up!");
-//                    }
-//                }
-//            }
-//        });
-//    }
-//    
-//    public void start() {
-//        timer.start();
-//        updateDisplay();
-//    }
-//    
-//    public void stop() {
-//        timer.stop();
-//    }
-//    
-//    public void reset(int seconds) {
-//        countdown = seconds;
-//        updateDisplay();
-//    }
-//    
-//    public int getTime() {
-//        return countdown;
-//    }
-//    
-//    public void updateDisplay() {
-//        if (jLabel1 != null) {
-//            jLabel1.setText(String.valueOf(countdown));
-//        }
-//    }
-//}
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Timer1 {
+   private Timer timer;
+   private int timeLeft;
+   private JLabel targetLabel;
+   
+   public Timer1(int seconds, JLabel label) {
+       this.timeLeft = seconds;
+       this.targetLabel = label;
+       
+       timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (timeLeft >= 0) {
+                    targetLabel.setText("" + timeLeft);
+                    timeLeft--;
+                } if(timeLeft <= 0) {
+                    targetLabel.setText("Time's up");
+                    timer.stop();
+                }
+            }
+        });
+   }
+   
+   public void start() {
+       timer.start();
+   }
+   
+   public void stop() {
+       timer.stop();
+   }
+   
+   public void reset(int newTime) {
+       timer.stop();
+       this.timeLeft = newTime;
+       targetLabel.setText("" + timeLeft);
+   }
+   
+   public int getTime() {
+       return timeLeft;
+   }
+   
+   public void transitionTimer(JFrame currentFrame, JFrame nextFrame){
+       Timer transitionTime = new Timer(1500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                nextFrame.setVisible(true);
+                currentFrame.setVisible(false);
+            }
+        });
+        transitionTime.setRepeats(false);
+        transitionTime.start();
+   }
+   
+
+}
+
+   
+               

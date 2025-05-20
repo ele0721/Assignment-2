@@ -13,81 +13,63 @@ import java.io.File;
  */
 
 public class Quiz1 extends Mode {
-    private boolean isTrue;
-    private String feedback;
-    private String news;
-    private int score;
+    private String [] sections;
+    private int index = 0;
 
     
     public Quiz1() {
         super(true, false);
-        this.isTrue = true;
-        this.feedback = "";
-        this.news = "";
-        this.score = 0;
+        this.index = 0;
     }
+   
     
-    
-    public String getNews() {
-        return news;
-    }
-    
-    
-    public String getFeedback() {
-        return feedback;
-    }
-    
-    public boolean getReal() {
-        return isTrue;
-    }
-    
-    public void incrementScore() {
-        score++;
-    }
-    
-    public int getScore() {
-        return score;
-    }
-    
-    
-    public boolean checkAnswer(boolean userAnswer) {
-        if (userAnswer == isTrue) {
-            incrementScore();
-            return true;
+    public String [] getInformation(String fileName) {
+        int lineCount = 0;
+        try {
+            Scanner scanner = new Scanner(new File(fileName));
+            while(scanner.hasNext()) {
+                String line = scanner.nextLine();
+                if(line.trim().equals(",")) {
+                        lineCount++;
+                }
+            } 
+            scanner.close();
+        } catch(IOException e) {
+            System.out.println("Error");
         }
-        return false;
+        try {
+            int count = 0;
+            sections = new String[lineCount + 1];
+            String currentSection = "";
+            Scanner scanner1 = new Scanner(new File(fileName));
+            while(scanner1.hasNext()) {
+                String line1 = scanner1.nextLine();
+                if(line1.trim().equals(",")) {
+                    if(!currentSection.isEmpty()) {
+                        sections[index++] = currentSection.trim();
+                        index++;
+                        currentSection = "";
+                    }
+                } else {
+                    currentSection += line1 + "\n";
+                }
+            }
+            if(!currentSection.isEmpty()) {
+                sections[index] = currentSection.trim();
+            }
+            scanner1.close();
+        } catch(IOException e) {
+            System.out.println("Error");
+        }
+        return sections;
     }
-  
-
     
-//    public String [] getInformation(String fileName) {
-//        int lineCount = 0;
-//        String [] information = new String[lineCount];
-//        try {
-//            Scanner scanner = new Scanner(new File(fileName));
-//            while(scanner.hasNext()) {
-//                scanner.nextLine();
-//                lineCount++;
-//            }
-//            
-//        } catch(IOException e) {
-//            System.out.println("Error!");
-//        }
-//    
-//        try {
-//            Scanner scanner = new Scanner(new File(fileName));
-//            int i = 0;
-//            while (scanner.hasNext()) {
-//                String line = scanner.nextLine();
-//                String [] data = line.split(",");
-//             } 
-//                     
-//        } catch(IOException e) {
-//            System.out.println("Error" + e);
-//        }   
-//        return information;
-//    
-//    }
+    public String displaySection() {
+        if(sections != null && index < sections.length) {
+            return sections[index++];
+        } else {
+            return "Error";
+        }
+    }
     
 }
-
