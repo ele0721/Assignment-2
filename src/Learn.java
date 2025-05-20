@@ -15,10 +15,12 @@ import java.util.Scanner;
 public class Learn extends Mode{
     private String[] sections;
     private int index;
+    private Bookmark bookmark;
     
     public Learn(){
          super(false, true);
          this.index = 0;
+         this.bookmark = new Bookmark();
     }
     
     public String [] loadInformation(String fileName){
@@ -69,7 +71,43 @@ public class Learn extends Mode{
             return "No more sections!";
         }
     }
+    
+    public int getIndex() {
+        return index - 1;
+    }
+    
+    public void setIndex(int newIndex) {
+        if (sections == null || sections.length == 0) {
+            return; 
+        }
+        if (newIndex >= 0 && newIndex < sections.length) {
+            index = newIndex;
+        } else {
+            System.out.println("Invalid index.");
+        }
+    }
+    
+    public String getSection(int index) {
+        return sections[index];
+    }
+    
+    public void addBookmark(String name) {
+        bookmark.saveBookmark(name, getIndex());
+    }
+    
+    public void goToBookmark(String name) {
+        int bookmarkedIndex = bookmark.getBookmarkIndex(name);
+        if (bookmarkedIndex != -1) {
+            setIndex(bookmarkedIndex);
+        } else {
+            System.out.println("Bookmark not found.");
+        }
+    }
      
+    public void removeBookmark(String name) {
+        bookmark.removeBookmark(name);
+    }
+    
     @Override    
     public void startMode() {
         System.out.println("Starting Learn Mode...");
