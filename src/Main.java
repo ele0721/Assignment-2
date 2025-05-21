@@ -8,7 +8,7 @@
  * @author 345700744
  */
 public class Main extends javax.swing.JFrame {
-
+    private Mode mode;
     /**
      * Creates new form Main
      */
@@ -25,21 +25,70 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        learnButton = new javax.swing.JButton();
+        quizButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        learnButton.setText("Learn");
+        learnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                learnButtonActionPerformed(evt);
+            }
+        });
+
+        quizButton.setText("Quiz");
+        quizButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quizButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Choose a mode:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(111, 111, 111)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(learnButton)
+                        .addGap(39, 39, 39)
+                        .addComponent(quizButton)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(learnButton)
+                    .addComponent(quizButton))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void learnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButtonActionPerformed
+        // TODO add your handling code here:
+        new learningPage().setVisible(true);
+        mode = new Learn();
+        this.setVisible(false);
+    }//GEN-LAST:event_learnButtonActionPerformed
+
+    private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
+        // TODO add your handling code here:
+        new Quiz().setVisible(true);
+        mode = new Quiz1();
+        this.setVisible(false);
+    }//GEN-LAST:event_quizButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -76,5 +125,8 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton learnButton;
+    private javax.swing.JButton quizButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,3 @@
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -112,81 +108,26 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-     /**
-     * This method searches for a user in the array by matching the username and password.
-     * @param users Array of usernames.
-     * @param passwords Array of passwords.
-     * @param username The username to search for.
-     * @param password The password to verify.
-     * @return The index of the matched user if found; otherwise, -1.
-     */
-    private int findUser(String[] users, String[] passwords, String username, String password) {
-        // Loop through the users array
-        for (int i = 0; i < users.length; i++) {
-            // Check if both username and password match
-            if (users[i].equals(username) && passwords[i].equals(password)) {
-                return i; // Match found
-            }
-        }
-        return -1; // No match found
-    }
-
-    /**
-     * This method reads usernames and passwords from the "users.txt" file to confirm if the user exists.
-     */
     private void processLogin() {
         // Get the username and password inputs from the text fields
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
         // Check if the username or password is empty
-        if (username.isEmpty() || password.isEmpty()){
+        if (username.isEmpty() || password.isEmpty()) {
             // Display an error message if inputs are invalid
-        message.setText("invalid username or password");
-        } else{
-            int countLine = 0; // counter for the number of lines in the file
-            try {
-                // Read the file to determine the number of lines
-                Scanner fileInput = new Scanner(new File("users.txt"));
-                // Count the number of lines in the file
-                while (fileInput.hasNextLine()) {
-                    fileInput.nextLine();
-                    countLine++; // Increase counter by one
-                    }
-                fileInput.close(); // Close the scanner after reading
-                // Dynamically size the arrays based on countLine
-                String[] users = new String[countLine];
-                String[] passwords = new String[countLine];
-                // Read the "users.txt" file and store the information in the arrays
-                fileInput = new Scanner(new File("users.txt"));
-                 int index = 0; // Track current array index
-                 // Loop through each line in the file
-                 while (fileInput.hasNextLine()) {
-                    // Split the informations using "," delimiter
-                    String[] info = fileInput.nextLine().split(",");
-                    // store the information in the arrays
-                    users[index] = info[0].trim();
-                    passwords[index] = info[1].trim();
-                    index++; // Increase counter by one
-                }
-                 fileInput.close(); // Close scanner after reading
-
-                // Call the findUser method
-                int num = findUser(users, passwords, username, password);
-                // Check if a match is found
-                if (num == -1) {
-                    // Display an error message if no match is found
-                    message.setText("User not found");              
-                } else {
-                    // Open the next frame and close the current frame
-                    new Main(username).setVisible(true);
-                    this.setVisible(false);
-                }                            
-            } catch (IOException e) {
-                // Display error message if an error occurs 
-                System.out.print("Error:" + e); 
-            }
+            message.setText("invalid username or password");
         }
-   }
+        User loginUser = new User(username, password);
+        boolean success = loginUser.login();
+
+        if (success) {
+            new Main(username).setVisible(true);
+            this.setVisible(false);
+            loginUser.chooseMode();
+        } else {
+            message.setText("Invalid username or password.");
+        }
+    }
     
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // Call the processLogin() method
