@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,11 +11,13 @@
  * @author 345700744
  */
 public class Main extends javax.swing.JFrame {
-    private Mode mode;
+    private Mode [] modes = new Mode[2];
+    private User user;
     /**
      * Creates new form Main
      */
     public Main(String username) {
+        this.user = new User(username, "");
         initComponents();
     }
 
@@ -76,18 +81,34 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Display a message for each mode.
+     */
+    private void processModes() {
+        for (Mode mode : modes) { // Loop through all modes
+            // Display message based on childs' overidden method
+            JOptionPane.showMessageDialog(null, mode.startMode()); 
+        }
+    }
     private void learnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButtonActionPerformed
-        // TODO add your handling code here:
-        new learningPage().setVisible(true);
-        mode = new Learn();
-        this.setVisible(false);
+ Mode learnMode = new Learn(user.getUsername()); // Create Learn mode
+        user.setMode(learnMode); // Set Learn mode
+        modes[0] = learnMode; // Store mode in array
+
+        new learningPage(user.getUsername()).setVisible(true); // Open learning page
+        this.setVisible(false); // Hide current window
+        processModes(); // Display mode messages
+
     }//GEN-LAST:event_learnButtonActionPerformed
 
     private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
-        // TODO add your handling code here:
-        new Quiz().setVisible(true);
-        mode = new Quiz1();
-        this.setVisible(false);
+        Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
+        user.setMode(quizMode); // Set Quiz mode
+        modes[1] = quizMode; // Store mode in array
+
+        new Quiz().setVisible(true); // Open quiz window
+        this.setVisible(false); // Hide current window
+        processModes(); // Display mode messages
     }//GEN-LAST:event_quizButtonActionPerformed
 
     /**

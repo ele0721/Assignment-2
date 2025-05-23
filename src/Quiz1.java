@@ -17,11 +17,10 @@ public class Quiz1 extends Mode {
     private int index = 0;
 
     
-    public Quiz1() {
-        super(true, false);
+     public Quiz1(String username) {
+        super(username, true, false);
         this.index = 0;
-    }
-   
+     }
     
     public String [] getInformation(String fileName) {
         int lineCount = 0;

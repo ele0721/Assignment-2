@@ -1,3 +1,8 @@
+
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -9,19 +14,23 @@
  */
 public class learningPage extends javax.swing.JFrame {
     private Learn learn;
-    private Bookmark bookmarks;
+    private Bookmark bookmark;
+    private String username;
 
     /**
      * Creates new form learningPage
      */
-    public learningPage() {
+    public learningPage(String username) {
         initComponents();
-        learn = new Learn();
-        bookmarks = new Bookmark();
+        this.username = username;
+        this.learn = new Learn(username);
+        this.bookmark = new Bookmark(username);
         learn.loadInformation("informations.txt");
         updateBookmarkList();
+        updateProgressBar();
         learn.setIndex(0);
         textBox.setText(learn.getSection(0));
+        
     }
 
     /**
@@ -33,7 +42,7 @@ public class learningPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bookmark = new javax.swing.JFrame();
+        bookmarkFrame = new javax.swing.JFrame();
         bookmarkComboBox = new javax.swing.JComboBox<>();
         removeButton = new javax.swing.JButton();
         save = new javax.swing.JFrame();
@@ -45,9 +54,9 @@ public class learningPage extends javax.swing.JFrame {
         textBox = new javax.swing.JTextPane();
         nextButton = new javax.swing.JButton();
         bookmarkButton = new javax.swing.JButton();
+        progressBar = new javax.swing.JProgressBar();
 
-        bookmark.setMinimumSize(new java.awt.Dimension(320, 110));
-        bookmark.setPreferredSize(new java.awt.Dimension(320, 110));
+        bookmarkFrame.setMinimumSize(new java.awt.Dimension(320, 110));
 
         bookmarkComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,29 +71,28 @@ public class learningPage extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout bookmarkLayout = new javax.swing.GroupLayout(bookmark.getContentPane());
-        bookmark.getContentPane().setLayout(bookmarkLayout);
-        bookmarkLayout.setHorizontalGroup(
-            bookmarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookmarkLayout.createSequentialGroup()
+        javax.swing.GroupLayout bookmarkFrameLayout = new javax.swing.GroupLayout(bookmarkFrame.getContentPane());
+        bookmarkFrame.getContentPane().setLayout(bookmarkFrameLayout);
+        bookmarkFrameLayout.setHorizontalGroup(
+            bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookmarkFrameLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(bookmarkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(removeButton)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
-        bookmarkLayout.setVerticalGroup(
-            bookmarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookmarkLayout.createSequentialGroup()
+        bookmarkFrameLayout.setVerticalGroup(
+            bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookmarkFrameLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(bookmarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookmarkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(removeButton))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
         save.setMinimumSize(new java.awt.Dimension(307, 100));
-        save.setPreferredSize(new java.awt.Dimension(307, 100));
 
         jLabel3.setText("Name");
 
@@ -161,9 +169,12 @@ public class learningPage extends javax.swing.JFrame {
                         .addComponent(bookmarkButton)
                         .addGap(33, 33, 33))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nextButton)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(nextButton)))
                         .addContainerGap(32, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
@@ -175,83 +186,90 @@ public class learningPage extends javax.swing.JFrame {
                     .addComponent(saveButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nextButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(nextButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void updateBookmarkList() {
-        bookmarkComboBox.removeAllItems();
-        String[] bookmarkNames = bookmarks.getBookmarkNames();
-
-        if (bookmarkNames.length == 0) {
-            bookmarkComboBox.addItem("No bookmarks available");
-        } else {
-            for (String name : bookmarkNames) {
-                bookmarkComboBox.addItem(name);
-            }
-        }
-        bookmarkComboBox.setSelectedIndex(-1);
+    /**
+     * Updates the bookmark list by reloading saved bookmarks
+     */
+    private void updateBookmarkList() { 
+    // PREVENT AUTO SELECTION 
+    ActionListener[] listeners = bookmarkComboBox.getActionListeners();
+    for (ActionListener listener : listeners) {
+        bookmarkComboBox.removeActionListener(listener);
     }
+    bookmarkComboBox.removeAllItems(); // Clear existing items
+
+    List<String[]> bookmarks = bookmark.loadBookmarks(); // Load saved bookmarks
+    // Check and display message if no bookmarks exist
+    if (bookmarks.isEmpty()) {   
+        bookmarkComboBox.addItem("No bookmarks available");
+    } else {
+        for (String[] entry : bookmarks) { // Loop through bookmark array
+            bookmarkComboBox.addItem(entry[0]); // Add each bookmark name to dropdown
+        }
+    }
+    
+    // PREVENT AUTO SELECTION
+    for (ActionListener listener : listeners) {
+        bookmarkComboBox.addActionListener(listener);
+    }
+    bookmarkComboBox.setSelectedIndex(-1); // Ensure no bookmark is auto-selected from the list
+}
+    /**
+     * Updates the progress bar with the current learning progress percentage
+     */
+        private void updateProgressBar() {
+        int progress = learn.getProgressPercentage(); // Get progress percentage
+        progressBar.setValue(progress); // Update progress bar
+        }
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        learn.loadInformation("informations.txt");
-        String informations = learn.getNextSection();
-        textBox.setText(informations);
+            String section = learn.getNextSection(); // Get next learning section
+            textBox.setText(section); // Display next section
+            updateProgressBar(); // Update progress bar
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void bookmarkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkComboBoxActionPerformed
-        if (bookmarkComboBox.getSelectedIndex() > -1) {
-            String selectedBookmark = bookmarkComboBox.getSelectedItem().toString().trim();
-            int sectionIndex = bookmarks.getBookmarkIndex(selectedBookmark);
-            if (sectionIndex >= 0 && sectionIndex < learn.loadInformation("informations.txt").length) { 
-                learn.setIndex(sectionIndex); 
-                textBox.setText(learn.getSection(sectionIndex));
-            } else {
-                System.out.println("Error: Invalid index.");
+        String selectedBookmark = (String) bookmarkComboBox.getSelectedItem();  // Get selected bookmark
+            if (selectedBookmark != null) { // Check if a bookmark is selected
+                learn.goToBookmark(selectedBookmark); // Navigate to selected bookmark 
+                textBox.setText(learn.getSection(learn.getIndex()-1)); // Display bookmarked section 
             }
-        }
+            updateProgressBar(); // Update progress bar
     }//GEN-LAST:event_bookmarkComboBoxActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        if (bookmarkComboBox.getSelectedItem() != null) {
-            String name = bookmarkComboBox.getSelectedItem().toString();
-            if (!name.equals("No bookmarks available")) {
-                bookmarks.removeBookmark(name.trim());
-                updateBookmarkList();
-            } else {
-                System.out.println("No valid bookmark selected.");
+            String selectedBookmark = (String) bookmarkComboBox.getSelectedItem(); // Get selected bookmark
+            if (selectedBookmark != null) { // Check if a bookmark is selected
+                learn.removeBookmark(selectedBookmark); // Remove selected bookmark 
+                updateBookmarkList(); // Update bookmark list
             }
-        }
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton2ActionPerformed
-        String name = bookmarkNameField.getText().trim();
-        int sectionIndex = learn.getIndex();
-        if (!name.isEmpty()) {
-            bookmarks.saveBookmark(name, sectionIndex);
-            updateBookmarkList();
-            textBox.setText(learn.getSection(sectionIndex));
-            save.dispose();
-        }
+    String name = bookmarkNameField.getText().trim(); // Get entered bookmark name
+    if (!name.isEmpty()) { // Ensure name is not empty
+        learn.addBookmark(name); // Save new bookmark
+        updateBookmarkList(); // Update bookmark list
+    }
     }//GEN-LAST:event_saveButton2ActionPerformed
 
     private void bookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkButtonActionPerformed
-        int currentIndex = learn.getIndex();
-        bookmarks.loadBookmarks();
-        updateBookmarkList();
-        if (currentIndex >= 0 && currentIndex < learn.loadInformation("informations.txt").length) {
-            textBox.setText(learn.getSection(currentIndex)); 
-        } else {
-            System.out.println("Invalid index detected.");
-        }
-        bookmark.setVisible(true);
+    bookmarkFrame.setVisible(true); // Show bookmark frame
     }//GEN-LAST:event_bookmarkButtonActionPerformed
 
     private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed
-        save.setVisible(true);
-        bookmarkNameField.setText("");
+        save.setVisible(true);  // Show save frame
+        bookmarkNameField.setText(""); // Clear bookmark name text field 
     }//GEN-LAST:event_saveButton1ActionPerformed
 
     /**
@@ -284,19 +302,19 @@ public class learningPage extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new learningPage().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame bookmark;
     private javax.swing.JButton bookmarkButton;
     private javax.swing.JComboBox<String> bookmarkComboBox;
+    private javax.swing.JFrame bookmarkFrame;
     private javax.swing.JTextField bookmarkNameField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nextButton;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton removeButton;
     private javax.swing.JFrame save;
     private javax.swing.JButton saveButton1;

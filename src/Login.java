@@ -123,7 +123,6 @@ public class Login extends javax.swing.JFrame {
         if (success) {
             new Main(username).setVisible(true);
             this.setVisible(false);
-            loginUser.chooseMode();
         } else {
             message.setText("Invalid username or password.");
         }

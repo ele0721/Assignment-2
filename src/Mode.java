@@ -12,26 +12,24 @@ public class Mode {
     private Learn learn;
     private boolean quizMode;
     private boolean learnMode;
+    private String username;
     
-    public Mode(boolean quizMode, boolean learnMode) {
+    
+    public Mode(String username, boolean quizMode, boolean learnMode) {
         this.quizMode = quizMode;
         this.learnMode = learnMode;
+        this.username = username;
     }
     
-    public void setMode() {
+    public void setMode(String username) {
         if (quizMode) {
             this.quiz = new Quiz();
       } if (learnMode) {
-          this.learn = new Learn();
+          this.learn = new Learn(username);
         }
     }
-    public void startMode() {
-        if (quizMode) {
-            System.out.println("Quiz Mode Activated!");
-        } else if (learnMode) {
-            System.out.println("Learn Mode Activated!");
-        } else {
-            System.out.println("No mode selected.");
-        }
+    
+    public String startMode() {
+        return "No mode selected.";
     }
 }
