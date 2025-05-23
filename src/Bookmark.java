@@ -11,28 +11,36 @@ import java.util.Scanner;
  */
 
 /**
- *
  * @author Helen
  */
 public class Bookmark {
-        private String bookmarkFile;
+    private String bookmarkFile;
 
-
+    // Constructor
     public Bookmark(String username) {
         this.bookmarkFile = "bookmark_" + username + ".txt";
-         File file = new File(bookmarkFile);
+        File file = new File(bookmarkFile);
     }
 
+    /**
+     * Saves a bookmark with a name and index to the user's bookmark file.
+     * @param name The name of the bookmark
+     * @param index The section index
+     */
     public void saveBookmark(String name, int index) {
         try {
-            FileWriter writer = new FileWriter(bookmarkFile, true);         
-            writer.write(name + "," + index + "\n");
+            FileWriter writer = new FileWriter(bookmarkFile, true); // Open filewriter to append to bookmarkFile 
+            writer.write(name + "," + index + "\n"); // Write bookmark name and index
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error saving bookmark: " + e.getMessage());
+            System.out.println("Error saving bookmark: " + e.getMessage()); // Display message if error occurs
         }
     }
 
+    /**
+     * Removes a bookmark by name from the user's bookmark file.
+     * @param name The name of the bookmark to remove
+     */
     public void removeBookmark(String name) {
         List<String[]> bookmarks = loadBookmarks();
         try {
@@ -48,6 +56,10 @@ public class Bookmark {
         }
     }
 
+    /**
+     * Loads all bookmarks from the user's bookmark file.
+     * @return A list of bookmarks
+     */
      public List<String[]> loadBookmarks() {
         List<String[]> bookmarks = new ArrayList<>();
         try {
@@ -61,6 +73,5 @@ public class Bookmark {
             System.out.println("No saved bookmarks found.");
         }
         return bookmarks;
-        
     }
 }
