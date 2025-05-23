@@ -41,12 +41,6 @@ public class Timer1 {
        timer.stop();
    }
    
-   public void reset(int newTime) {
-       timer.stop();
-       this.timeLeft = newTime;
-       targetLabel.setText("" + timeLeft);
-   }
-   
    public int getTime() {
        return timeLeft;
    }
@@ -62,6 +56,18 @@ public class Timer1 {
         transitionTime.setRepeats(false);
         transitionTime.start();
    }
+   
+   public void feedbackTransitionTimer(JFrame currentFrame, JFrame nextFrame) {
+        Timer transitionTime = new Timer(7000, new ActionListener() {
+                @Override
+            public void actionPerformed(ActionEvent e) {
+                nextFrame.setVisible(true);
+                currentFrame.setVisible(false);
+            }
+        });
+        transitionTime.setRepeats(false);
+        transitionTime.start();
+       }
    
 
 }
