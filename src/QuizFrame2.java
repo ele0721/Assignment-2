@@ -33,7 +33,6 @@ public class QuizFrame2 extends javax.swing.JFrame {
 
         
         jLabel3.setText(scoreTracker.toString() + "/4");
-        jLabel3.setText(scoreTracker.toString());
         countdown = new Timer1(20, jLabel1);
         //Initialize jLabel4 to empty;
         jTextArea1.setText("");
