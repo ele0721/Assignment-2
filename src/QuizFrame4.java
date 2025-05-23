@@ -13,6 +13,9 @@ public class QuizFrame4 extends javax.swing.JFrame {
     private Score scoreTracker = Score.getInstance();
     private Mode mode;
     private Timer1 countdown;
+                
+    private String username;
+
 
     /**
      * Creates new form QuizFrame4
@@ -20,7 +23,7 @@ public class QuizFrame4 extends javax.swing.JFrame {
     public QuizFrame4() {
         initComponents();
                 
-        mode =  new Quiz1();
+        mode =  new Quiz1(username);
         
         if (mode instanceof Quiz1) {
             Quiz1 quiz = (Quiz1) mode;

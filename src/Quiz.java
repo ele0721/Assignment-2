@@ -15,14 +15,17 @@ public class Quiz extends javax.swing.JFrame {
     //Declares countdown timer object from Timer1 class
     private Timer1 countdown;
     private Mode mode;
+
+    private String username;
+
     
     /**
      * Creates new form Quiz
      */
     public Quiz() {
         initComponents();
-        
-        mode = new Quiz1();
+        mode = new Quiz1(username);
+
         
         if (mode instanceof Quiz1) {
             Quiz1 quiz = (Quiz1) mode;

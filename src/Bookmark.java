@@ -3,6 +3,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -15,102 +17,52 @@ import java.util.Scanner;
  * @author 345700744
  */
 public class Bookmark {
-    private String[] bookmarkNames;
-    private int[] bookmarkIndexes;
-    private int count;
-    private static final int MAX_BOOKMARKS = 10;
-    private static final String BOOKMARK_FILE = "bookmarks.txt";
+        private String bookmarkFile;
 
-    public Bookmark() {
-        bookmarkNames = new String[MAX_BOOKMARKS];
-        bookmarkIndexes = new int[MAX_BOOKMARKS];
-        count = 0;
-        loadBookmarks();
+
+    public Bookmark(String username) {
+        this.bookmarkFile = "bookmark_" + username + ".txt";
+         File file = new File(bookmarkFile);
     }
 
-    public void saveBookmark(String name, int sectionIndex) {
-        if (count < MAX_BOOKMARKS) {
-            bookmarkNames[count] = name;
-            bookmarkIndexes[count] = sectionIndex;
-            count++;
-            writeToFile();
-        } else {
-            System.out.println("Bookmark limit reached.");
+    public void saveBookmark(String name, int index) {
+        try {
+            FileWriter writer = new FileWriter(bookmarkFile, true);         
+            writer.write(name + "," + index + "\n");
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error saving bookmark: " + e.getMessage());
         }
     }
 
     public void removeBookmark(String name) {
-        int index = findBookmarkIndex(name);
-        if (index != -1) {
-            for (int i = index; i < count - 1; i++) {
-                bookmarkNames[i] = bookmarkNames[i + 1];
-                bookmarkIndexes[i] = bookmarkIndexes[i + 1];
-            }
-            count--; 
-            writeToFile();
-        } else {
-            System.out.println("Bookmark not found.");
-        }
-    }
-
-    public String[] getBookmarkNames() {
-    String[] result = new String[count]; 
-    for (int i = 0; i < count; i++) {
-        result[i] = bookmarkNames[i];
-    }
-    return result;
-}
-
-    private int findBookmarkIndex(String name) {
-        for (int i = 0; i < count; i++) {
-            if (bookmarkNames[i].equals(name)) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public void loadBookmarks() {
-        count = 0;
-        bookmarkNames = new String[MAX_BOOKMARKS];
-        bookmarkIndexes = new int[MAX_BOOKMARKS]; 
-
+        List<String[]> bookmarks = loadBookmarks();
         try {
-            Scanner scanner = new Scanner(new File(BOOKMARK_FILE));
-            while (scanner.hasNext() && count < MAX_BOOKMARKS) {
-                String name = scanner.nextLine();
-                int index = Integer.parseInt(scanner.nextLine());
-
-                if (index >= 0) {
-                    bookmarkNames[count] = name;
-                    bookmarkIndexes[count] = index;
-                    count++;
+            PrintWriter writer = new PrintWriter(new FileWriter(bookmarkFile));
+            for (String[] entry : bookmarks) {
+                if (!entry[0].equals(name)) {
+                    writer.println(entry[0] + "," + entry[1]);
                 }
             }
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error removing bookmark: " + e.getMessage());
+        }
+    }
+
+     public List<String[]> loadBookmarks() {
+        List<String[]> bookmarks = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(new File(bookmarkFile));
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                bookmarks.add(line.split(",")); 
+            }
+            scanner.close();
         } catch (IOException e) {
             System.out.println("No saved bookmarks found.");
         }
+        return bookmarks;
+        
     }
-
-
-    public int getBookmarkIndex(String name) {
-        name = name.trim();
-        for (int i = 0; i < count; i++) {
-            if (bookmarkNames[i].equals(name)) {
-                return bookmarkIndexes[i];
-            }
-        }
-        return -1; 
-    }
-
-    private void writeToFile() {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(BOOKMARK_FILE))) {
-            for (int i = 0; i < count; i++) {
-                writer.println(bookmarkNames[i]);
-                writer.println(bookmarkIndexes[i]);
-            }
-        } catch (IOException e) {
-            System.out.println("Error saving bookmarks.");
-        }
-    }  
 }

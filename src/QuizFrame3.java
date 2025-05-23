@@ -12,13 +12,16 @@ public class QuizFrame3 extends javax.swing.JFrame {
     private Timer1 countdown;
     private Score scoreTracker = Score.getInstance();
     private Mode mode;
+    private String username;
+
     /**
      * Creates new form QuizFrame3
      */
     public QuizFrame3() {
         initComponents();
-        
-        mode =  new Quiz1();
+
+        mode =  new Quiz1(username);
+
         
         if (mode instanceof Quiz1) {
             Quiz1 quiz = (Quiz1) mode;

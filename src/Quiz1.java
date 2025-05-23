@@ -18,15 +18,14 @@ public class Quiz1 extends Mode {
     private boolean initialized = false;
 
     
-    public Quiz1() {
-        super(true, false);
+     public Quiz1(String username) {
+        super(username, true, false);
         this.index = 1;
-    }
-    
-    public void nextSection() {
+     }
+     
+         public void nextSection() {
         index++;
     }
-  
     
     public String [] getInformation(String fileName) {
         int lineCount = 0;

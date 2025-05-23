@@ -15,11 +15,14 @@ public class QuizFrame2 extends javax.swing.JFrame {
     private Score scoreTracker = Score.getInstance();
     private Timer1 countdown;
     private Mode mode;
+    private String username;
+
     
     public QuizFrame2() {
         initComponents();
         
-        mode = new Quiz1();
+        mode = new Quiz1(username);
+
         
         if (mode instanceof Quiz1) {
             Quiz1 quiz = (Quiz1) mode;
