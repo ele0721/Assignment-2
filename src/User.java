@@ -17,27 +17,28 @@ public class User {
     private String password;
     private Mode mode;
     private static final String USER_FILE = "users.txt";
-    
+
+    // Constructor
     public User(String username, String password){
         this.username = username;
         this.password = password;
         this.mode = null;
     }
-    
+
+    /**
+     * Retrieves the username of the user.
+     * @return The username
+     */
     public String getUsername(){
         return username;
     }
-    
+
+    /**
+     * Retrieves the password of the user.
+     * @return The password
+     */
     public String getPassword(){
         return password;
-    }
-    
-    public void setUsername(String username){
-        this.username = username;
-    }
-    
-    public void setPassword(String password){
-        this.password = password;
     }
        
     /**
@@ -63,13 +64,13 @@ public class User {
      */
     public boolean signUp() {
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(USER_FILE, true));
-            writer.println(username + "," + password);
+            PrintWriter writer = new PrintWriter(new FileWriter(USER_FILE, true)); // Open writer to append to USER_FILE
+            writer.println(username + "," + password); // Store user's information
             writer.close();
-            new File(getBookmarkFile()).createNewFile();
+            new File(getBookmarkFile()).createNewFile(); // Create bookmark file for user
             return true;
         } catch (IOException e) {
-            System.out.println("Error signing up: " + e.getMessage());
+            System.out.println("Error signing up: " + e.getMessage()); // Display message if an error occurs
             return false;
         }
     }
@@ -80,19 +81,19 @@ public class User {
      */
     public boolean login() {
         try {
-            Scanner scanner = new Scanner(new File(USER_FILE));
+            Scanner scanner = new Scanner(new File(USER_FILE)); // Open scanner to read USER_FILE
+            // Read each line and split username and password
             while (scanner.hasNextLine()) {
                 String[] userData = scanner.nextLine().split(",");
+                // If User is found, return true
                 if (userData[0].trim().equals(username) && userData[1].trim().equals(password)) {
                     return true;
                 }
             }
             scanner.close();
         } catch (IOException e) {
-            System.out.println("Error reading user file: " + e.getMessage());
+            System.out.println("Error reading user file: " + e.getMessage()); // Display message if an error occurs
         }
-
-        System.out.println("Invalid username or password.");
         return false;
     }
     
