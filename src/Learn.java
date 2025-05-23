@@ -8,8 +8,7 @@ import java.util.Scanner;
  */
 
 /**
- *
- * @author 345700744
+ * @author Helen
  */
 public class Learn extends Mode{
     private String[] sections;
@@ -23,9 +22,9 @@ public class Learn extends Mode{
     }
     
     /**
-     *  Loads learning sections from a specified file.
-     * @param fileName The name of the file containing learning sections.
-     * @return An array of strings where each element represents a section.
+     * Loads learning sections from a specified file.
+     * @param fileName The name of the file containing learning sections
+     * @return An array of strings where each element represents a section
      */
     public String [] loadInformation(String fileName){
         int lineCount = 0;
@@ -71,15 +70,15 @@ public class Learn extends Mode{
      * Calculates and returns the user's learning progress as a percentage.
      * @return Progress percentage (0-100)
      */
-       public int getProgressPercentage() {
+    public int getProgressPercentage() {
         if (sections == null || sections.length == 0) return 0;
         return (int) (((double) index / sections.length) * 100);
     }
 
-       /**
-        * Retrieves the next section in the learning mode.
-        * @return The next section's content or a message if finished.
-        */
+    /**
+     * Retrieves the next section in the learning mode.
+     * @return The next section's content or a message if finished
+     */
     public String getNextSection() {
         if (sections != null && index < sections.length) {
             return sections[index++];
@@ -88,11 +87,11 @@ public class Learn extends Mode{
             return "No more sections!";
         }
     }
-     /**
+    
+    /**
      * Gets the current section index.
-     * @return The current index.
+     * @return The current index
      */
-
     public int getIndex() {
         return index;
     }
@@ -101,28 +100,27 @@ public class Learn extends Mode{
      * Sets the section index to a new value.
      * @param newIndex The new index value
      */
-
     public void setIndex(int newIndex) {
        index = newIndex;
     }
+    
     /**
      * Retrieves the content of a specific section based on its index.
-     *
      * @param index The index of the section to retrieve
      * @return The section's content
      */
-
     public String getSection(int index) {
         return sections[index];
     }
+    
     /**
      * Saves a bookmark at the current index with a given name.
-     *
      * @param name The name of the bookmark
      */
     public void addBookmark(String name) {
         bookmark.saveBookmark(name, getIndex());
     }
+    
     /**
      * Navigates to a bookmarked section by its name.
      * @param name The name of the bookmark to navigate to
@@ -136,24 +134,23 @@ public class Learn extends Mode{
             }
         }
     }
+    
     /**
      * Removes a saved bookmark by its name.
      * @param name The name of the bookmark to remove
      */
-
     public void removeBookmark(String name) {
         bookmark.removeBookmark(name);
     }
+    
     /**
      * Starts the Learn mode and returns a message indicating its activation.
-     *
      * @return A message indicating Learn mode has started
      */
     @Override    
     public String startMode() {
         return "Starting Learn Mode...";
     }
-
 }
 
 

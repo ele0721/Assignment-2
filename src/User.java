@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,8 +10,7 @@ import java.util.Scanner;
  */
 
 /**
- *
- * @author 345700744
+ * @author Helen
  */
 public class User {
     private String username;
@@ -41,11 +39,9 @@ public class User {
     public void setPassword(String password){
         this.password = password;
     }
-    
-    
+       
     /**
      * Assigns a mode to the user.
-     * This establishes an **association** between User and Mode.
      * @param mode The mode to assign
      */
     public void setMode(Mode mode) {
@@ -61,11 +57,10 @@ public class User {
         return mode;
     }
 
-        /**
-     * Store the user's username and password in the user file and creates a personal bookmark file
+    /**
+     * Store the user's username and password in the user file and create a personal bookmark file
      * @return True if sign-up is successful, false otherwise
      */
-
     public boolean signUp() {
         try {
             PrintWriter writer = new PrintWriter(new FileWriter(USER_FILE, true));

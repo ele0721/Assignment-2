@@ -127,11 +127,9 @@ public class SignUp extends javax.swing.JFrame {
         } else {
             User newUser = new User(username, password);
             newUser.signUp();
-            try {
                 // Create a specfic file for the user if it doesn't exist
-                File userFile = new File(username + ".txt");
+                File userFile = new File(newUser.getBookmarkFile());
                 if (!userFile.exists()) {
-                    userFile.createNewFile();
                     // Display a message confirming the signup was successful
                     message.setText("Sign up sucessfully!");
                     message.setForeground(new java.awt.Color(51, 153, 255));
@@ -140,9 +138,6 @@ public class SignUp extends javax.swing.JFrame {
                     message.setText("Username Taken");
                     message.setForeground(new java.awt.Color(255, 51, 51));
                 }
-            } catch (IOException e) {
-                System.out.println("error");
-            }
         }
     }//GEN-LAST:event_signUpbuttonActionPerformed
 

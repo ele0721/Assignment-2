@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author 345700744
+ * @author Helen
  */
 public class Main extends javax.swing.JFrame {
     private Mode [] modes = new Mode[2];

@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author 345700744
+ * @author Helen
  */
 public class learningPage extends javax.swing.JFrame {
     private Learn learn;
