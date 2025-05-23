@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 
 /**
- * @author 345700744
+ * @author Helen
  */
 public class Learn extends Mode{
     private String[] sections;
