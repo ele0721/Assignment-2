@@ -1,9 +1,5 @@
 Quiz feedback
 ,
--No sources mentioned as evidence 
--Exaggerated headline to attract clicks 
--The site itself admits to only write fake stories about Disney
-,
 -Some of the claims came from:
  unpublished sources 
  fake news
@@ -11,8 +7,16 @@ Quiz feedback
  social media influencers
 -Many health organizations reported that there was insufficient evidence to support the claim.
 ,
-Looking closely at other contexts globally the video is poor quality
-Accent is off, his head and voice did not appear authentic upon inspection
-No official or trustworthy source
-A Ukrainian news source confirmed hackers were behind the live broadcasting. 
+-No sources mentioned as evidence 
+-Exaggerated headline to attract clicks 
+-The site itself admits to only write fake stories about Disney
+,
+-Comes from a very well known and trustworthy source
+-Information is backed by a family statement
+-News is also shown by different sites
+,
+-The image is from a 2015 protest in Boston. It has nothing to do with Texas or Hurricane Harvey.
+-The group that posted the article intentionally took the image out of context to mislead people. 
+-Source is questionable.
+-Part of the title is in all caps, which is considered a red flag, unprofessionalism, or sing of a less reputable publication. 
 

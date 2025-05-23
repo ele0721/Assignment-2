@@ -12,20 +12,30 @@ public class QuizFrame3 extends javax.swing.JFrame {
     private Timer1 countdown;
     private Score scoreTracker = Score.getInstance();
     private Mode mode;
+    private String username;
+
     /**
      * Creates new form QuizFrame3
      */
     public QuizFrame3() {
         initComponents();
         
+        mode =  new Quiz1(username);
+        
+        if (mode instanceof Quiz1) {
+            Quiz1 quiz = (Quiz1) mode;
+            quiz.getInformation("quizFeedback.txt");
+            quiz.nextSection();
+            quiz.nextSection();
+        
+        }
+
         //Sets score to 0 when quiz is started
-        jLabel3.setText(scoreTracker.toString());
+        jLabel3.setText(scoreTracker.toString() + "/4");
         //Initializes countdown timer with JLabel1 for display
         countdown = new Timer1(20, jLabel1);
-        //Starts timer
-        countdown.start();
         //Initialize jLabel4 to empty;
-        jLabel4.setText("");
+        jTextArea1.setText("");
     }
 
     /**
@@ -42,10 +52,16 @@ public class QuizFrame3 extends javax.swing.JFrame {
         fake = new javax.swing.JButton();
         result = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         real.setText("Real");
         real.addActionListener(new java.awt.event.ActionListener() {
@@ -63,37 +79,40 @@ public class QuizFrame3 extends javax.swing.JFrame {
 
         result.setText("jLabel3");
 
-        jLabel4.setText("jLabel4");
-
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Images/Screenshot 2025-05-21 at 10.51.27 AM.png"))); // NOI18N
         jLabel5.setText("jLabel5");
+        jLabel5.setPreferredSize(new java.awt.Dimension(720, 520));
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(56, 56, 56)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(49, Short.MAX_VALUE))
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(result, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addGap(130, 130, 130)
                         .addComponent(real, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(111, 111, 111))
+                        .addGap(125, 125, 125)
+                        .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,39 +121,58 @@ public class QuizFrame3 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(real, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fake, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void realActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realActionPerformed
-        countdown.stop();
-        result.setText("Wrong answer");
-        jLabel3.setText(scoreTracker.toString());
-    }//GEN-LAST:event_realActionPerformed
-
-    private void fakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakeActionPerformed
         // TODO add your handling code here:
         scoreTracker.incrementScore();
-        jLabel3.setText(scoreTracker.toString());
+        jLabel3.setText(scoreTracker.toString() + "/4");
         result.setText("Correct answer! +1 point");
         //Stops coountdown timer when aswer is selected
         countdown.stop();
-
+        
+        fake.setEnabled(false);
+        
         //Use the Timer1 class to transition to next frame
-//        countdown.transitionTimer(this, new QuizFrame3());
+        countdown.transitionTimer(this, new QuizFrame4());
+
+    }//GEN-LAST:event_realActionPerformed
+
+    private void fakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakeActionPerformed
+        result.setText("Wrong answer");
+        jLabel3.setText(scoreTracker.toString() + "/4");
+        countdown.stop();
+        
+        real.setEnabled(false);
+        
+        if (mode instanceof Quiz1) {
+            Quiz1 quiz = (Quiz1) mode;
+            String section = quiz.displaySection();
+            jTextArea1.setText(section);
+        }
+        
+        countdown.feedbackTransitionTimer(this, new QuizFrame4());
     }//GEN-LAST:event_fakeActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        //Starts timer
+        countdown.start();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -175,8 +213,9 @@ public class QuizFrame3 extends javax.swing.JFrame {
     private javax.swing.JButton fake;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton real;
     private javax.swing.JLabel result;
     // End of variables declaration//GEN-END:variables

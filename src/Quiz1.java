@@ -14,49 +14,57 @@ import java.io.File;
 
 public class Quiz1 extends Mode {
     private String [] sections;
-    private int index = 0;
+    private int index;
+    private boolean initialized = false;
 
     
      public Quiz1(String username) {
         super(username, true, false);
         this.index = 0;
      }
+     
+         public void nextSection() {
+        index++;
+    }
     
     public String [] getInformation(String fileName) {
         int lineCount = 0;
         try {
             Scanner scanner = new Scanner(new File(fileName));
+            if(scanner.hasNextLine()) {
+                scanner.nextLine();
+            }
             while(scanner.hasNext()) {
                 String line = scanner.nextLine();
                 if(line.trim().equals(",")) {
-                        lineCount++;
+                    lineCount++;
                 }
             } 
             scanner.close();
         } catch(IOException e) {
             System.out.println("Error");
         }
+        int count = 0;
+        sections = new String[lineCount + 1];
+        String currentSection = "";
         try {
-            int count = 0;
-            sections = new String[lineCount + 1];
-            String currentSection = "";
-            Scanner scanner1 = new Scanner(new File(fileName));
-            while(scanner1.hasNext()) {
-                String line1 = scanner1.nextLine();
-                if(line1.trim().equals(",")) {
+            Scanner scanner = new Scanner(new File(fileName));
+            while(scanner.hasNext()) {
+                String line = scanner.nextLine();
+                if(line.trim().equals(",")) {
                     if(!currentSection.isEmpty()) {
-                        sections[index++] = currentSection.trim();
-                        index++;
+                        sections[count++] = currentSection;
                         currentSection = "";
                     }
                 } else {
-                    currentSection += line1 + "\n";
+                    currentSection += line.trim() + "\n";
                 }
             }
+            scanner.close();
             if(!currentSection.isEmpty()) {
-                sections[index] = currentSection.trim();
+                sections[count++] = currentSection;
             }
-            scanner1.close();
+            initialized = true;
         } catch(IOException e) {
             System.out.println("Error");
         }
@@ -64,10 +72,14 @@ public class Quiz1 extends Mode {
     }
     
     public String displaySection() {
-        if(sections != null && index < sections.length) {
-            return sections[index++];
+        if(!initialized || sections == null) {
+            return "Error!";
+        }
+        if(index < sections.length) {
+            String section = sections[index];
+            return section;
         } else {
-            return "Error";
+            return "Error!";
         }
     }
     
