@@ -10,8 +10,7 @@ import java.io.BufferedReader;
  * @author elena
  */
 public class setLeaderboard {
-    private int topScore;
-    private String filename;
+    
     
     
     
