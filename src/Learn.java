@@ -14,7 +14,8 @@ public class Learn extends Mode{
     private String[] sections;
     private int index;
     private Bookmark bookmark;
-    
+
+    // Constructor
     public Learn(String username){
          super(username, false, true);
          this.index = 0;
@@ -27,38 +28,41 @@ public class Learn extends Mode{
      * @return An array of strings where each element represents a section
      */
     public String [] loadInformation(String fileName){
-        int lineCount = 0;
+        int lineCount = 0; // Count the number of sections
         try {
-            Scanner scanner = new Scanner(new File(fileName));
+            Scanner scanner = new Scanner(new File(fileName)); // Open scanner to read the file
+            // Read each lines to determine the number of sections
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 if(line.trim().equals("///")){
-                lineCount++;
+                lineCount++; // Increase counter
                 }
             }
             scanner.close();
         } catch(IOException e){
             System.out.println("Error loading information: " + e.getMessage());
         }
-        sections = new String[lineCount + 1];        
-        int count = 0;
-        String currentSection = "";
+        sections = new String[lineCount + 1];  // Initialize the array with the correct number of sections     
+        int count = 0;  // Counter to track the sections
+        String currentSection = ""; // Set currentSection empty
         try {
+            // Read file again to store sections
             Scanner scanner = new Scanner(new File(fileName));
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 if (line.trim().equals("///")) {
+                    // If current section is not empty, store section
                     if (!currentSection.isEmpty()) {
                         sections[count++] = currentSection;
-                        currentSection = "";
+                        currentSection = ""; // Reset for the next section
                     }
                 } else {
-                    currentSection += line.trim() + "\n";
+                    currentSection += line.trim() + "\n";  // Append section content
                 }
             }
             scanner.close();
                 if (!currentSection.isEmpty()) {
-                sections[count++] = currentSection;
+                sections[count++] = currentSection; // Store the last section if not empty
             }
         } catch(IOException e){
             System.out.println("Error reading file.");
@@ -71,8 +75,11 @@ public class Learn extends Mode{
      * @return Progress percentage (0-100)
      */
     public int getProgressPercentage() {
-        if (sections == null || sections.length == 0) return 0;
-        return (int) (((double) index / sections.length) * 100);
+        if (sections == null || sections.length == 0) { // Check if section is valid
+            return 0;
+        } else {
+        return (int) (((double) index / sections.length) * 100); // Calculate progress percentage
+        }
     }
 
     /**
@@ -80,10 +87,10 @@ public class Learn extends Mode{
      * @return The next section's content or a message if finished
      */
     public String getNextSection() {
-        if (sections != null && index < sections.length) {
-            return sections[index++];
+        if (sections != null && index < sections.length) { // Check if section is valid
+            return sections[index++]; // Return next section and increase index by one
         } else {
-            index = 0;
+            index = 0; // Reset index
             return "No more sections!";
         }
     }
@@ -126,9 +133,9 @@ public class Learn extends Mode{
      * @param name The name of the bookmark to navigate to
      */
     public void goToBookmark(String name) {
-        for (String[] entry : bookmark.loadBookmarks()) {
-
-            if (entry[0].equals(name)) {
+        for (String[] entry : bookmark.loadBookmarks()) { // Loop through saved bookmarks
+            // Find matching bookmark and update index
+            if (entry[0].equals(name)) { 
                 setIndex(Integer.parseInt(entry[1]));
                 return;
             }
