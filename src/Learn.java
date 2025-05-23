@@ -23,8 +23,8 @@ public class Learn extends Mode{
     
     /**
      * Loads learning sections from a specified file.
-     * @param fileName The name of the file containing learning sections.
-     * @return An array of strings where each element represents a section.
+     * @param fileName The name of the file containing learning sections
+     * @return An array of strings where each element represents a section
      */
     public String [] loadInformation(String fileName){
         int lineCount = 0;
@@ -70,14 +70,14 @@ public class Learn extends Mode{
      * Calculates and returns the user's learning progress as a percentage.
      * @return Progress percentage (0-100)
      */
-       public int getProgressPercentage() {
+    public int getProgressPercentage() {
         if (sections == null || sections.length == 0) return 0;
         return (int) (((double) index / sections.length) * 100);
     }
 
     /**
      * Retrieves the next section in the learning mode.
-     * @return The next section's content or a message if finished.
+     * @return The next section's content or a message if finished
      */
     public String getNextSection() {
         if (sections != null && index < sections.length) {
@@ -90,7 +90,7 @@ public class Learn extends Mode{
     
     /**
      * Gets the current section index.
-     * @return The current index.
+     * @return The current index
      */
     public int getIndex() {
         return index;
