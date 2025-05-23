@@ -42,17 +42,17 @@ public class Bookmark {
      * @param name The name of the bookmark to remove
      */
     public void removeBookmark(String name) {
-        List<String[]> bookmarks = loadBookmarks();
+        List<String[]> bookmarks = loadBookmarks(); // Load current bookmarks
         try {
-            PrintWriter writer = new PrintWriter(new FileWriter(bookmarkFile));
-            for (String[] entry : bookmarks) {
-                if (!entry[0].equals(name)) {
-                    writer.println(entry[0] + "," + entry[1]);
+            PrintWriter writer = new PrintWriter(new FileWriter(bookmarkFile)); // Open file to write
+            for (String[] entry : bookmarks) { // Loop through bookmarks
+                if (!entry[0].equals(name)) { // Skip the bookmark to be removed
+                    writer.println(entry[0] + "," + entry[1]); // Write remaining bookmarks
                 }
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error removing bookmark: " + e.getMessage());
+            System.out.println("Error removing bookmark: " + e.getMessage()); // Display message if error occurs
         }
     }
 
@@ -60,17 +60,18 @@ public class Bookmark {
      * Loads all bookmarks from the user's bookmark file.
      * @return A list of bookmarks
      */
-     public List<String[]> loadBookmarks() {
-        List<String[]> bookmarks = new ArrayList<>();
+     public List<String[]> loadBookmarks() { // Load current bookmarks
+        List<String[]> bookmarks = new ArrayList<>(); // Initialize bookmark list
         try {
-            Scanner scanner = new Scanner(new File(bookmarkFile));
+            Scanner scanner = new Scanner(new File(bookmarkFile)); // Open bookmark file
+            // Read all bookmarks and split bookmark name and index
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
                 bookmarks.add(line.split(",")); 
             }
             scanner.close();
         } catch (IOException e) {
-            System.out.println("No saved bookmarks found.");
+            System.out.println("No saved bookmarks found."); // Display message if error occurs
         }
         return bookmarks;
     }
