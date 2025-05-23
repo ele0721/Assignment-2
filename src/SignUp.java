@@ -138,7 +138,6 @@ public class SignUp extends javax.swing.JFrame {
                     message.setText("Username Taken");
                     message.setForeground(new java.awt.Color(255, 51, 51));
                 }
-
         }
     }//GEN-LAST:event_signUpbuttonActionPerformed
 
