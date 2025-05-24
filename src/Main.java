@@ -21,11 +21,16 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         this.isGuest = true;
         initComponents();
+        quizButton.setEnabled(false);
+
+        
     }
     public Main(String username) {
         this.user = new User(username, "");
         this.isGuest = false;
-        initComponents(); 
+        initComponents();
+        loginButton.setVisible(false);
+
     }
 
     /**
@@ -37,62 +42,10 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        learnButton1 = new javax.swing.JButton();
-        quizButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         learnButton = new javax.swing.JButton();
         quizButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-
-        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        jFrame1.setPreferredSize(new java.awt.Dimension(564, 703));
-        jFrame1.setSize(new java.awt.Dimension(564, 703));
-
-        learnButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        learnButton1.setText("Learn");
-        learnButton1.setToolTipText("");
-        learnButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                learnButton1ActionPerformed(evt);
-            }
-        });
-
-        quizButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        quizButton1.setText("Quiz");
-        quizButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quizButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("Choose a mode:");
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(quizButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                        .addComponent(learnButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(191, Short.MAX_VALUE))
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jFrame1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel2)
-                .addGap(47, 47, 47)
-                .addComponent(learnButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(quizButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
-        );
+        loginButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(564, 703));
@@ -118,6 +71,14 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Choose a mode:");
 
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,22 +86,29 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                        .addComponent(learnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(191, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                            .addComponent(learnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(191, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(loginButton)
+                        .addGap(58, 58, 58))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addComponent(jLabel1)
-                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(loginButton))
+                .addGap(45, 45, 45)
                 .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(quizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,50 +117,43 @@ public class Main extends javax.swing.JFrame {
     /**
      * Display a message for each mode.
      */
-    private void processModes() {
-        for (Mode mode : modes) { // Loop through all modes
-            // Display message based on childs' overidden method
-            JOptionPane.showMessageDialog(this, mode.startMode()); 
-        }
+    private void processModes(Mode mode) {
+        // Display message based on childs' overidden method
+        JOptionPane.showMessageDialog(this, mode.startMode()); 
     }
     private void learnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButtonActionPerformed
 if (isGuest){
             Mode guestLearnMode = new Learn("guest");
             guestLearnMode.setGuest(true);
-
-        modes[0] = guestLearnMode; // Store mode in array
+        modes[0] = guestLearnMode;
         modes[1] = guestLearnMode;
-        new learningPage("guest").setVisible(true); // Open learning page
-        this.setVisible(false); // Hide current window
+        new learningPage("guest").setVisible(true);
+        this.setVisible(false);
+        processModes(guestLearnMode);
 } else{
-        Mode learnMode = new Learn(user.getUsername()); // Create Learn mode
+        Mode learnMode = new Learn(user.getUsername());
         user.setMode(learnMode);
-        modes[0] = learnMode; // Store mode in array
-        new learningPage(user.getUsername()).setVisible(true); // Open learning page
-        this.setVisible(false); // Hide current window
-
+        modes[0] = learnMode;
+        new learningPage(user.getUsername()).setVisible(true);
+        this.setVisible(false);
+        processModes(user.getMode());
 }
-        processModes(); // Display mode messages
-
     }//GEN-LAST:event_learnButtonActionPerformed
 
     private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
         Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
         user.setMode(quizMode); // Set Quiz mode
         modes[1] = quizMode; // Store mode in array
-
         new Quiz().setVisible(true); // Open quiz window
         this.setVisible(false); // Hide current window
-        processModes(); // Display mode messages
+        processModes(user.getMode()); // Display mode messages
     }//GEN-LAST:event_quizButtonActionPerformed
 
-    private void learnButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButton1ActionPerformed
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_learnButton1ActionPerformed
-
-    private void quizButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_quizButton1ActionPerformed
+        new Login().setVisible(true); // Open quiz window
+        this.setVisible(false);
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,12 +192,9 @@ if (isGuest){
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton learnButton;
-    private javax.swing.JButton learnButton1;
+    private javax.swing.JButton loginButton;
     private javax.swing.JButton quizButton;
-    private javax.swing.JButton quizButton1;
     // End of variables declaration//GEN-END:variables
 }
