@@ -9,9 +9,11 @@
  */
 public class Score {
     private int score;
+    private String currentUsername;
     
     public Score() {
       this.score = 0;  
+      this.currentUsername = "";
     }
     
     public void incrementScore() {
@@ -20,6 +22,24 @@ public class Score {
     
     public int getScore() {
         return score;
+    }
+    
+    public void setScore(int score) {
+        this.score = score;
+    }
+    
+    public void setCurrentUsername(String username) {
+        this.currentUsername = username;
+    }
+    
+    public String getCurrentUsername() {
+        return currentUsername;
+    }
+    
+    public void submitToLeaderboard() {
+        if(currentUsername != null && !currentUsername.isEmpty()) {
+            setLeaderboard.getInstance().addScore(currentUsername, score);
+        }
     }
     
     @Override

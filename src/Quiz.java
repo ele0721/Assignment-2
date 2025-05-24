@@ -12,9 +12,11 @@
 public class Quiz extends javax.swing.JFrame {
     //Gets the instance of the Score class to keep track of the user's score
     private Score scoreTracker = Score.getInstance();
-    //Declares countdown timer object from Timer1 class
+    //countdown timer object from Timer1 class
     private Timer1 countdown;
+    //Mode object to handle the different quiz types
     private Mode mode;
+    //Store the current user's username
     private String username;
 
     
@@ -23,20 +25,21 @@ public class Quiz extends javax.swing.JFrame {
      */
     public Quiz() {
         initComponents();
+        //Creates a new Quiz1 mode instance and passes username parameter
         mode = new Quiz1(username);
-
-        
+        //Checks if mode is instance of Quiz1 class
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1 types to access any Quiz1 methods
             Quiz1 quiz = (Quiz1) mode;
+            //Loads information from the file
             quiz.getInformation("quizFeedback.txt");
         }
 
-        
         //Sets score to 0 when quiz is started
         jLabel3.setText(scoreTracker.toString() + "/4");
-        //Initializes countdown timer with JLabel1 for display
+        //Initializes countdown timer with 20 second duration and JLabel1 for display
         countdown = new Timer1(20, jLabel1);
-        //Initialize jLabel4 to empty;
+        //Clears the feedback text area at the start of the quiz
         jTextArea1.setText("");
 
     }
@@ -119,14 +122,14 @@ public class Quiz extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
+                        .addGap(140, 140, 140)
                         .addComponent(jLabel4)))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -138,7 +141,7 @@ public class Quiz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(real, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fake, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,12 +153,16 @@ public class Quiz extends javax.swing.JFrame {
 
     private void fakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakeActionPerformed
         // TODO add your handling code here:
+        //Increment user's score 
         scoreTracker.incrementScore();
+        //Updates the new score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Display feedback for correct answer;
         result.setText("Correct answer! +1 point");
-        //Stops countdown timer when aswer is selected
+        //Stops countdown timer when user selectes an answer
         countdown.stop();
         
+        //Disables the "Real" button to prevent user from moving to the next frame and selecting another answer
         real.setEnabled(false);
         
         //Use the Timer1 class to transition to next frame 
@@ -166,19 +173,26 @@ public class Quiz extends javax.swing.JFrame {
 
     private void realActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realActionPerformed
         // TODO add your handling code here:
-        countdown.stop();
-        result.setText("Wrong answer");
+        //Updates the new score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Displays feedback for wrong answer
+        result.setText("Wrong answer");
+        //Stops timer when user selects an answer
+        countdown.stop();
         
-        //Disable the "Fake" button
+        //Disable the "Fake" button to prevent user from moving to the next frame and selecting another answer
         fake.setEnabled(false);
         
+        //Chekcs if mode is an instance of Quiz1
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1
             Quiz1 quiz = (Quiz1) mode;
+            //Retrives the feedback section from Quiz1 object
             String section = quiz.displaySection();
+            //Displays the feedback in the text area
             jTextArea1.setText(section);
         }    
-
+        //User Timer1 class method to transition to the next frame
         countdown.feedbackTransitionTimer(this, new QuizFrame2());
     }//GEN-LAST:event_realActionPerformed
 

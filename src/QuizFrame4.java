@@ -9,11 +9,10 @@
  */
 
 public class QuizFrame4 extends javax.swing.JFrame {
-    
+    //Initialzes variables for timer, score tracking, quiz mode, and username
     private Score scoreTracker = Score.getInstance();
     private Mode mode;
-    private Timer1 countdown;
-                
+    private Timer1 countdown;    
     private String username;
 
 
@@ -22,14 +21,15 @@ public class QuizFrame4 extends javax.swing.JFrame {
      */
     public QuizFrame4() {
         initComponents();
-                
+        //Creates a new Quiz1 mode instance and passes username parameter        
         mode =  new Quiz1(username);
-        
+        //Checks if mode is instance of Quiz1 class
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1 types to access any Quiz1 methods
             Quiz1 quiz = (Quiz1) mode;
             //Reads and retrieves information from the quizFeedback file
             quiz.getInformation("quizFeedback.txt");
-            //Moves to the next section of the file
+            //Moves to the fourth section of the file
             quiz.nextSection();
             quiz.nextSection();
             quiz.nextSection();
@@ -150,29 +150,45 @@ public class QuizFrame4 extends javax.swing.JFrame {
 
     private void realActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realActionPerformed
         // TODO add your handling code here:
-        //Stops timer
+        //Stops timer an answer is selected
         countdown.stop();
+        //Displays feedback 
         result.setText("Wrong answer");
         //Displays the updated score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Enables the fake button
+        fake.setEnabled(false);
+       
+       //Chekcs if mode is an instance of Quiz1
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1
             Quiz1 quiz = (Quiz1) mode;
+            //Retrives the feedback section from Quiz1 object
             String section = quiz.displaySection();
-            //Displays feedback into the text area
+            //Displays the feedback in the text area
             jTextArea1.setText(section);
-        }
+        }  
+        //Saves the user's score to the leaderboard
+        scoreTracker.submitToLeaderboard();
         
         //Calls the feedback transition timer and waits 7 seconds until moving to the next frame
         countdown.feedbackTransitionTimer(this, new Leaderboard());
     }//GEN-LAST:event_realActionPerformed
 
     private void fakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakeActionPerformed
+        //Increments score for right answer
         scoreTracker.incrementScore();
+        //Update the score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Displays feedback
         result.setText("Correct answer! +1 point");
+        //Enables the real button 
+        real.setEnabled(false);
         //Stops coountdown timer when aswer is selected
         countdown.stop();
-        
+        //Saves the user's score to the leaderboard
+        scoreTracker.submitToLeaderboard();
+        //Calls the transition timer and moves to the next frame
         countdown.transitionTimer(this, new Leaderboard());
 
     }//GEN-LAST:event_fakeActionPerformed
