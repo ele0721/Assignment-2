@@ -8,7 +8,7 @@
  * @author elena
  */
 public class QuizFrame3 extends javax.swing.JFrame {
-    
+    //Initialzes variables for timer, score tracking, quiz mode, and username
     private Timer1 countdown;
     private Score scoreTracker = Score.getInstance();
     private Mode mode;
@@ -19,16 +19,17 @@ public class QuizFrame3 extends javax.swing.JFrame {
      */
     public QuizFrame3() {
         initComponents();
-
-        mode =  new Quiz1(username);
-
-        
+        //Creates a new Quiz1 mode instance and passes username parameter
+        mode = new Quiz1(username);
+        //Checks if mode is instance of Quiz1 class
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1 types to access any Quiz1 methods
             Quiz1 quiz = (Quiz1) mode;
+            //Loads information from the file
             quiz.getInformation("quizFeedback.txt");
+            //Moves to the third section of the file
             quiz.nextSection();
             quiz.nextSection();
-        
         }
 
         //Sets score to 0 when quiz is started
@@ -140,32 +141,41 @@ public class QuizFrame3 extends javax.swing.JFrame {
 
     private void realActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realActionPerformed
         // TODO add your handling code here:
+        //Increments score
         scoreTracker.incrementScore();
+        //Updates the new score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Display feedback
         result.setText("Correct answer! +1 point");
         //Stops coountdown timer when aswer is selected
         countdown.stop();
-        
-        fake.setEnabled(false);
-        
+        //Disables the fake button to prevent the user from moving to the next frame
+        fake.setEnabled(false);      
         //Use the Timer1 class to transition to next frame
         countdown.transitionTimer(this, new QuizFrame4());
 
     }//GEN-LAST:event_realActionPerformed
 
     private void fakeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fakeActionPerformed
+        //Displays feedback
         result.setText("Wrong answer");
+        //Updates score
         jLabel3.setText(scoreTracker.toString() + "/4");
+        //Stops timer when user selects an answer
         countdown.stop();
-        
+        //Disables the real button
         real.setEnabled(false);
         
+       //Chekcs if mode is an instance of Quiz1
         if (mode instanceof Quiz1) {
+            //Casts mode to Quiz1
             Quiz1 quiz = (Quiz1) mode;
+            //Retrives the feedback section from Quiz1 object
             String section = quiz.displaySection();
+            //Displays the feedback in the text area
             jTextArea1.setText(section);
-        }
-        
+        }  
+        //User Timer1 class method to transition to the next frame
         countdown.feedbackTransitionTimer(this, new QuizFrame4());
     }//GEN-LAST:event_fakeActionPerformed
 

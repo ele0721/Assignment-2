@@ -86,6 +86,8 @@ public class User {
                 String[] userData = scanner.nextLine().split(",");
                 // If User is found, return true
                 if (userData[0].trim().equals(username) && userData[1].trim().equals(password)) {
+                    //Set the username when user logs in and tracks their score
+                    Score.getInstance().setCurrentUsername(username); 
                     return true;
                 }
             }
