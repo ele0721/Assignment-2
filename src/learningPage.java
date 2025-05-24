@@ -30,7 +30,6 @@ public class learningPage extends javax.swing.JFrame {
         updateProgressBar();
         learn.setIndex(0);
         textBox.setText(learn.getSection(0));
-        
     }
 
     /**
@@ -57,13 +56,17 @@ public class learningPage extends javax.swing.JFrame {
         progressBar = new javax.swing.JProgressBar();
 
         bookmarkFrame.setMinimumSize(new java.awt.Dimension(320, 110));
+        bookmarkFrame.setPreferredSize(new java.awt.Dimension(564, 200));
+        bookmarkFrame.setSize(new java.awt.Dimension(564, 200));
 
+        bookmarkComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bookmarkComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookmarkComboBoxActionPerformed(evt);
             }
         });
 
+        removeButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         removeButton.setText("Remove");
         removeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,27 +78,33 @@ public class learningPage extends javax.swing.JFrame {
         bookmarkFrame.getContentPane().setLayout(bookmarkFrameLayout);
         bookmarkFrameLayout.setHorizontalGroup(
             bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bookmarkFrameLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(bookmarkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bookmarkFrameLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(bookmarkComboBox, 0, 375, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(removeButton)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
         bookmarkFrameLayout.setVerticalGroup(
             bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookmarkFrameLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(37, 37, 37)
                 .addGroup(bookmarkFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bookmarkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(removeButton))
-                .addContainerGap(81, Short.MAX_VALUE))
+                    .addComponent(removeButton)
+                    .addComponent(bookmarkComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         save.setMinimumSize(new java.awt.Dimension(307, 100));
+        save.setPreferredSize(new java.awt.Dimension(564, 200));
+        save.setSize(new java.awt.Dimension(564, 200));
 
-        jLabel3.setText("Name");
+        bookmarkNameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel3.setText("Name:");
+
+        saveButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         saveButton2.setText("Save");
         saveButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,29 +117,34 @@ public class learningPage extends javax.swing.JFrame {
         saveLayout.setHorizontalGroup(
             saveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(saveLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(59, 59, 59)
                 .addGroup(saveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(saveLayout.createSequentialGroup()
-                        .addComponent(bookmarkNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, saveLayout.createSequentialGroup()
+                        .addComponent(bookmarkNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(saveButton2))
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(saveButton2)
+                        .addGap(68, 68, 68))
+                    .addGroup(saveLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         saveLayout.setVerticalGroup(
             saveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(saveLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(saveLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bookmarkNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveButton2))
-                .addGap(21, 21, 21))
+                    .addComponent(saveButton2)
+                    .addComponent(bookmarkNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(564, 703));
+        setSize(new java.awt.Dimension(564, 703));
 
+        saveButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         saveButton1.setText("Save");
         saveButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,9 +153,11 @@ public class learningPage extends javax.swing.JFrame {
         });
 
         textBox.setEditable(false);
+        textBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textBox.setAutoscrolls(false);
         jScrollPane1.setViewportView(textBox);
 
+        nextButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         nextButton.setText("Next");
         nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +165,7 @@ public class learningPage extends javax.swing.JFrame {
             }
         });
 
+        bookmarkButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         bookmarkButton.setText("Bookmark");
         bookmarkButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,40 +177,34 @@ public class learningPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(saveButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bookmarkButton)
-                        .addGap(33, 33, 33))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(nextButton)))
-                        .addContainerGap(32, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(nextButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(saveButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                        .addComponent(bookmarkButton)))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(86, 86, 86)
+                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookmarkButton)
                     .addComponent(saveButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(nextButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(nextButton)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,69 +213,70 @@ public class learningPage extends javax.swing.JFrame {
      * Updates the bookmark list by reloading saved bookmarks
      */
     private void updateBookmarkList() { 
-    // PREVENT AUTO SELECTION 
-    ActionListener[] listeners = bookmarkComboBox.getActionListeners();
-    for (ActionListener listener : listeners) {
-        bookmarkComboBox.removeActionListener(listener);
-    }
-    bookmarkComboBox.removeAllItems(); // Clear existing items
-
-    List<String[]> bookmarks = bookmark.loadBookmarks(); // Load saved bookmarks
-    // Check and display message if no bookmarks exist
-    if (bookmarks.isEmpty()) {   
-        bookmarkComboBox.addItem("No bookmarks available");
-    } else {
-        for (String[] entry : bookmarks) { // Loop through bookmark array
-            bookmarkComboBox.addItem(entry[0]); // Add each bookmark name to dropdown
+        // PREVENT AUTO SELECTION 
+        ActionListener[] listeners = bookmarkComboBox.getActionListeners();
+        for (ActionListener listener : listeners) {
+            bookmarkComboBox.removeActionListener(listener);
         }
+        bookmarkComboBox.removeAllItems(); // Clear existing items
+
+        List<String[]> bookmarks = bookmark.loadBookmarks(); // Load saved bookmarks
+        // Check and display message if no bookmarks exist
+        if (bookmarks.isEmpty()) {   
+            bookmarkComboBox.addItem("No bookmarks available");
+        } else {
+            for (String[] entry : bookmarks) { // Loop through bookmark array
+            bookmarkComboBox.addItem(entry[0]); // Add each bookmark name to dropdown
+            }
+        }
+    
+        // PREVENT AUTO SELECTION
+        for (ActionListener listener : listeners) {
+            bookmarkComboBox.addActionListener(listener);
+        }
+        bookmarkComboBox.setSelectedIndex(-1); // Ensure no bookmark is auto-selected from the list
     }
     
-    // PREVENT AUTO SELECTION
-    for (ActionListener listener : listeners) {
-        bookmarkComboBox.addActionListener(listener);
-    }
-    bookmarkComboBox.setSelectedIndex(-1); // Ensure no bookmark is auto-selected from the list
-}
     /**
      * Updates the progress bar with the current learning progress percentage
      */
-        private void updateProgressBar() {
+    private void updateProgressBar() {
         int progress = learn.getProgressPercentage(); // Get progress percentage
         progressBar.setValue(progress); // Update progress bar
         }
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-            String section = learn.getNextSection(); // Get next learning section
-            textBox.setText(section); // Display next section
-            updateProgressBar(); // Update progress bar
+        String section = learn.getNextSection(); // Get next learning section
+        textBox.setText(section); // Display next section
+        updateProgressBar(); // Update progress bar
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void bookmarkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkComboBoxActionPerformed
         String selectedBookmark = (String) bookmarkComboBox.getSelectedItem();  // Get selected bookmark
-            if (selectedBookmark != null) { // Check if a bookmark is selected
-                learn.goToBookmark(selectedBookmark); // Navigate to selected bookmark 
-                textBox.setText(learn.getSection(learn.getIndex()-1)); // Display bookmarked section 
-            }
-            updateProgressBar(); // Update progress bar
+        if (selectedBookmark != null) { // Check if a bookmark is selected
+            learn.goToBookmark(selectedBookmark); // Navigate to selected bookmark 
+            textBox.setText(learn.getSection(learn.getIndex()-1)); // Display bookmarked section 
+        }
+        updateProgressBar(); // Update progress bar
     }//GEN-LAST:event_bookmarkComboBoxActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-            String selectedBookmark = (String) bookmarkComboBox.getSelectedItem(); // Get selected bookmark
-            if (selectedBookmark != null) { // Check if a bookmark is selected
-                learn.removeBookmark(selectedBookmark); // Remove selected bookmark 
-                updateBookmarkList(); // Update bookmark list
-            }
+        String selectedBookmark = (String) bookmarkComboBox.getSelectedItem(); // Get selected bookmark
+        if (selectedBookmark != null) { // Check if a bookmark is selected
+            learn.removeBookmark(selectedBookmark); // Remove selected bookmark 
+            updateBookmarkList(); // Update bookmark list
+        }
     }//GEN-LAST:event_removeButtonActionPerformed
 
     private void saveButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton2ActionPerformed
-    String name = bookmarkNameField.getText().trim(); // Get entered bookmark name
-    if (!name.isEmpty()) { // Ensure name is not empty
-        learn.addBookmark(name); // Save new bookmark
-        updateBookmarkList(); // Update bookmark list
+        String name = bookmarkNameField.getText().trim(); // Get entered bookmark name
+        if (!name.isEmpty()) { // Ensure name is not empty
+            learn.addBookmark(name); // Save new bookmark
+            updateBookmarkList(); // Update bookmark list
     }
     }//GEN-LAST:event_saveButton2ActionPerformed
 
     private void bookmarkButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkButtonActionPerformed
-    bookmarkFrame.setVisible(true); // Show bookmark frame
+        bookmarkFrame.setVisible(true); // Show bookmark frame
     }//GEN-LAST:event_bookmarkButtonActionPerformed
 
     private void saveButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButton1ActionPerformed

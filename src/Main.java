@@ -30,19 +30,77 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFrame1 = new javax.swing.JFrame();
+        learnButton1 = new javax.swing.JButton();
+        quizButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         learnButton = new javax.swing.JButton();
         quizButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jFrame1.setPreferredSize(new java.awt.Dimension(564, 703));
+        jFrame1.setSize(new java.awt.Dimension(564, 703));
 
+        learnButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        learnButton1.setText("Learn");
+        learnButton1.setToolTipText("");
+        learnButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                learnButton1ActionPerformed(evt);
+            }
+        });
+
+        quizButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        quizButton1.setText("Quiz");
+        quizButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quizButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Choose a mode:");
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame1Layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(quizButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                        .addComponent(learnButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(191, Short.MAX_VALUE))
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jFrame1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jLabel2)
+                .addGap(47, 47, 47)
+                .addComponent(learnButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(quizButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(229, Short.MAX_VALUE))
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(564, 703));
+        setSize(new java.awt.Dimension(564, 703));
+
+        learnButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         learnButton.setText("Learn");
+        learnButton.setToolTipText("");
         learnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 learnButtonActionPerformed(evt);
             }
         });
 
+        quizButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         quizButton.setText("Quiz");
         quizButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,6 +108,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Choose a mode:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -57,25 +116,24 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(learnButton)
-                        .addGap(39, 39, 39)
-                        .addComponent(quizButton)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                        .addComponent(learnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(49, 49, 49)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(learnButton)
-                    .addComponent(quizButton))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(quizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,6 +168,14 @@ public class Main extends javax.swing.JFrame {
         this.setVisible(false); // Hide current window
         processModes(); // Display mode messages
     }//GEN-LAST:event_quizButtonActionPerformed
+
+    private void learnButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_learnButton1ActionPerformed
+
+    private void quizButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_quizButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,8 +214,12 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton learnButton;
+    private javax.swing.JButton learnButton1;
     private javax.swing.JButton quizButton;
+    private javax.swing.JButton quizButton1;
     // End of variables declaration//GEN-END:variables
 }
