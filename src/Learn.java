@@ -19,7 +19,9 @@ public class Learn extends Mode{
     public Learn(String username){
          super(username, false, true);
          this.index = 0;
+         if (!super.isGuest()){
          this.bookmark = new Bookmark(username);
+         }
     }
     
     /**
@@ -156,8 +158,12 @@ public class Learn extends Mode{
      */
     @Override    
     public String startMode() {
-        return "Starting Learn Mode...";
-    }
+        if (isGuest()) {
+            return "Guest Mode Activated - Bookmarks Disabled.";
+        } else {
+            return "Starting Learn Mode...";
+        }
+    }       
 }
 
 

@@ -13,12 +13,19 @@ import javax.swing.JOptionPane;
 public class Main extends javax.swing.JFrame {
     private Mode [] modes = new Mode[2];
     private User user;
+    private boolean isGuest;
     /**
      * Creates new form Main
      */
+
+    public Main() {
+        this.isGuest = true;
+        initComponents();
+    }
     public Main(String username) {
         this.user = new User(username, "");
-        initComponents();
+        this.isGuest = false;
+        initComponents(); 
     }
 
     /**
@@ -145,16 +152,26 @@ public class Main extends javax.swing.JFrame {
     private void processModes() {
         for (Mode mode : modes) { // Loop through all modes
             // Display message based on childs' overidden method
-            JOptionPane.showMessageDialog(null, mode.startMode()); 
+            JOptionPane.showMessageDialog(this, mode.startMode()); 
         }
     }
     private void learnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButtonActionPerformed
- Mode learnMode = new Learn(user.getUsername()); // Create Learn mode
-        user.setMode(learnMode); // Set Learn mode
-        modes[0] = learnMode; // Store mode in array
+if (isGuest){
+            Mode guestLearnMode = new Learn("guest");
+            guestLearnMode.setGuest(true);
 
+        modes[0] = guestLearnMode; // Store mode in array
+        modes[1] = guestLearnMode;
+        new learningPage("guest").setVisible(true); // Open learning page
+        this.setVisible(false); // Hide current window
+} else{
+        Mode learnMode = new Learn(user.getUsername()); // Create Learn mode
+        user.setMode(learnMode);
+        modes[0] = learnMode; // Store mode in array
         new learningPage(user.getUsername()).setVisible(true); // Open learning page
         this.setVisible(false); // Hide current window
+
+}
         processModes(); // Display mode messages
 
     }//GEN-LAST:event_learnButtonActionPerformed

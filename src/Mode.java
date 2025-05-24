@@ -8,26 +8,35 @@
  * @author elena
  */
 public class Mode {
-    private Quiz quiz;
-    private Learn learn;
     private boolean quizMode;
     private boolean learnMode;
-    private String username;
+    private String username;    
+    private boolean isGuest;
     
     
     public Mode(String username, boolean quizMode, boolean learnMode) {
         this.quizMode = quizMode;
         this.learnMode = learnMode;
         this.username = username;
+        this.isGuest = false;
     }
     
-    public void setMode(String username) {
-        if (quizMode) {
-            this.quiz = new Quiz();
-      } if (learnMode) {
-          this.learn = new Learn(username);
-        }
+    public Mode(boolean quizMode, boolean learnMode) {
+        this.quizMode = quizMode;
+        this.learnMode = learnMode;
+        this.username = "guest";
+        this.isGuest = true;
+        
     }
+    
+    public boolean isGuest(){
+        return isGuest;
+    }
+    
+    public void setGuest(boolean isGuest){
+        this.isGuest = isGuest;
+    }    
+   
     
     public String startMode() {
         return "No mode selected.";

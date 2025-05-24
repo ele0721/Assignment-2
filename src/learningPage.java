@@ -30,6 +30,10 @@ public class learningPage extends javax.swing.JFrame {
         updateProgressBar();
         learn.setIndex(0);
         textBox.setText(learn.getSection(0));
+        if (username.equals("guest")){
+            bookmarkButton.setVisible(false);
+            saveButton1.setVisible(false);
+        }
     }
 
     /**

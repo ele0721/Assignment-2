@@ -47,7 +47,6 @@ public class User {
      */
     public void setMode(Mode mode) {
         this.mode = mode;
-        mode.setMode(username);
     }
 
     /**
