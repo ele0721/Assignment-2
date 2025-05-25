@@ -22,17 +22,21 @@ public class learningPage extends javax.swing.JFrame {
      */
     public learningPage(String username) {
         initComponents();
+        // Initialize variables and load informations
         this.username = username;
         this.learn = new Learn(username);
         this.bookmark = new Bookmark(username);
         learn.loadInformation("informations.txt");
-        updateBookmarkList();
-        updateProgressBar();
         learn.setIndex(0);
         textBox.setText(learn.getSection(0));
+        updateBookmarkList();
+        updateProgressBar();
+        loginButton.setVisible(false);
+        // If user is in guest mode, disable bookmark feature
         if (username.equals("guest")){
             bookmarkButton.setVisible(false);
             saveButton1.setVisible(false);
+            loginButton.setVisible(true);
         }
     }
 
@@ -58,6 +62,7 @@ public class learningPage extends javax.swing.JFrame {
         nextButton = new javax.swing.JButton();
         bookmarkButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
+        loginButton = new javax.swing.JButton();
 
         bookmarkFrame.setMinimumSize(new java.awt.Dimension(320, 110));
         bookmarkFrame.setPreferredSize(new java.awt.Dimension(564, 200));
@@ -177,38 +182,53 @@ public class learningPage extends javax.swing.JFrame {
             }
         });
 
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(nextButton))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(loginButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                        .addComponent(bookmarkButton)))
+                        .addGap(42, 42, 42)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(nextButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(saveButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 295, Short.MAX_VALUE)
+                                .addComponent(bookmarkButton)))))
                 .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(73, 73, 73)
+                .addComponent(loginButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookmarkButton)
                     .addComponent(saveButton1))
-                .addGap(44, 44, 44)
+                .addGap(34, 34, 34)
+                .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(nextButton)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
@@ -249,9 +269,9 @@ public class learningPage extends javax.swing.JFrame {
         progressBar.setValue(progress); // Update progress bar
         }
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        updateProgressBar(); // Update progress bar
         String section = learn.getNextSection(); // Get next learning section
         textBox.setText(section); // Display next section
-        updateProgressBar(); // Update progress bar
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void bookmarkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkComboBoxActionPerformed
@@ -287,6 +307,11 @@ public class learningPage extends javax.swing.JFrame {
         save.setVisible(true);  // Show save frame
         bookmarkNameField.setText(""); // Clear bookmark name text field 
     }//GEN-LAST:event_saveButton1ActionPerformed
+
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        new Login().setVisible(true); // Open login window
+        this.setVisible(false);
+    }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,6 +354,7 @@ public class learningPage extends javax.swing.JFrame {
     private javax.swing.JTextField bookmarkNameField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton loginButton;
     private javax.swing.JButton nextButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton removeButton;

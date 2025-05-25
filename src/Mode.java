@@ -37,7 +37,6 @@ public class Mode {
         this.isGuest = isGuest;
     }    
    
-    
     public String startMode() {
         return "No mode selected.";
     }

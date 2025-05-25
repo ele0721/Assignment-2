@@ -159,7 +159,7 @@ public class Learn extends Mode{
     @Override    
     public String startMode() {
         if (isGuest()) {
-            return "Guest Mode Activated - Bookmarks Disabled.";
+            return "Guest Mode Activated - Login to enable Bookmark feature";
         } else {
             return "Starting Learn Mode...";
         }

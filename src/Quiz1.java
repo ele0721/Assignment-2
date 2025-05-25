@@ -83,4 +83,8 @@ public class Quiz1 extends Mode {
         }
     }
     
+    @Override    
+    public String startMode() {
+        return "Starting Learn Mode...";
+    }   
 }

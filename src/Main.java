@@ -1,5 +1,6 @@
 
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,20 +18,21 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-
+    
+    // Constructor for guest
     public Main() {
         this.isGuest = true;
         initComponents();
         quizButton.setEnabled(false);
-
-        
+        quizButton.setToolTipText("Login to try the quiz");
     }
+    
+    // Constructor for registered user
     public Main(String username) {
         this.user = new User(username, "");
         this.isGuest = false;
         initComponents();
         loginButton.setVisible(false);
-
     }
 
     /**
@@ -84,75 +86,73 @@ public class Main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(loginButton)
+                .addGap(58, 58, 58))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(129, 129, 129)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                            .addComponent(learnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(191, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(loginButton)
-                        .addGap(58, 58, 58))))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(quizButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(loginButton))
-                .addGap(45, 45, 45)
+                .addComponent(loginButton)
+                .addGap(47, 47, 47)
+                .addComponent(jLabel1)
+                .addGap(49, 49, 49)
                 .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(quizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addContainerGap(148, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     /**
-     * Display a message for each mode.
+     * Display a message based on the mode type.
+     * @param mode The mode type
      */
     private void processModes(Mode mode) {
-        // Display message based on childs' overidden method
         JOptionPane.showMessageDialog(this, mode.startMode()); 
     }
     private void learnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_learnButtonActionPerformed
-if (isGuest){
-            Mode guestLearnMode = new Learn("guest");
-            guestLearnMode.setGuest(true);
-        modes[0] = guestLearnMode;
-        modes[1] = guestLearnMode;
-        new learningPage("guest").setVisible(true);
-        this.setVisible(false);
-        processModes(guestLearnMode);
-} else{
-        Mode learnMode = new Learn(user.getUsername());
-        user.setMode(learnMode);
-        modes[0] = learnMode;
-        new learningPage(user.getUsername()).setVisible(true);
-        this.setVisible(false);
-        processModes(user.getMode());
-}
+        if (isGuest){ // Check if the user is a guest
+            Mode guestLearnMode = new Learn("guest"); // Create a learning mode for guest users
+            guestLearnMode.setGuest(true); // Set the user as a guest
+            // Display mode message
+            processModes(guestLearnMode);
+            // Open the learning page for guests and hide the current window
+            new learningPage("guest").setVisible(true);
+            this.setVisible(false);
+        } else{
+            // Create a learning mode for a registered user
+            Mode learnMode = new Learn(user.getUsername());
+            user.setMode(learnMode); // Set learn mode
+            // Display mode message
+            processModes(user.getMode());
+            // Open the learning page for users and hide the current window
+            new learningPage(user.getUsername()).setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_learnButtonActionPerformed
 
     private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
         Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
         user.setMode(quizMode); // Set Quiz mode
-        modes[1] = quizMode; // Store mode in array
         new Quiz().setVisible(true); // Open quiz window
         this.setVisible(false); // Hide current window
-        processModes(user.getMode()); // Display mode messages
+        processModes(user.getMode()); // Display mode message
     }//GEN-LAST:event_quizButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
-        new Login().setVisible(true); // Open quiz window
-        this.setVisible(false);
+        new Login().setVisible(true); // Open login window
+        this.setVisible(false); // Hide current window
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
