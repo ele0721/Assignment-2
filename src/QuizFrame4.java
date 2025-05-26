@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -190,6 +193,13 @@ public class QuizFrame4 extends javax.swing.JFrame {
         scoreTracker.submitToLeaderboard();
         //Calls the transition timer and moves to the next frame
         countdown.transitionTimer(this, new Leaderboard());
+               
+        // Retrieves the current user from the session
+        User user = UserSession.getInstance().getUser();
+        // Calls the method to mark the quiz as completed
+        user.completeQuiz();
+        // Displays a pop-up message confirming the quiz achievement unlock
+        JOptionPane.showMessageDialog(this, "🏆 Achievement Unlocked: Finished the quiz!");
 
     }//GEN-LAST:event_fakeActionPerformed
 

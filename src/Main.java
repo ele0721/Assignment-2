@@ -1,4 +1,5 @@
 
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -12,7 +13,6 @@ import javax.swing.SwingUtilities;
  * @author Helen
  */
 public class Main extends javax.swing.JFrame {
-    private Mode [] modes = new Mode[2];
     private User user;
     private boolean isGuest;
     /**
@@ -25,6 +25,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         quizButton.setEnabled(false);
         quizButton.setToolTipText("Login to try the quiz");
+        MenuBar.setVisible(false);
     }
     
     // Constructor for registered user
@@ -44,13 +45,46 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        allAchievements = new javax.swing.JFrame();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        achievementBox = new javax.swing.JTextArea();
         learnButton = new javax.swing.JButton();
         quizButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        MenuBar = new javax.swing.JMenuBar();
+        modeMenu = new javax.swing.JMenu();
+        Learn = new javax.swing.JMenuItem();
+        Quiz = new javax.swing.JMenuItem();
+        achievementMenu = new javax.swing.JMenu();
+
+        allAchievements.setFocusCycleRoot(false);
+        allAchievements.setSize(new java.awt.Dimension(400, 300));
+
+        achievementBox.setEditable(false);
+        achievementBox.setColumns(20);
+        achievementBox.setRows(5);
+        jScrollPane3.setViewportView(achievementBox);
+
+        javax.swing.GroupLayout allAchievementsLayout = new javax.swing.GroupLayout(allAchievements.getContentPane());
+        allAchievements.getContentPane().setLayout(allAchievementsLayout);
+        allAchievementsLayout.setHorizontalGroup(
+            allAchievementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allAchievementsLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+        allAchievementsLayout.setVerticalGroup(
+            allAchievementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allAchievementsLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(66, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(564, 703));
         setSize(new java.awt.Dimension(564, 703));
 
         learnButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -81,6 +115,40 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        modeMenu.setText("Mode");
+        modeMenu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        modeMenu.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        Learn.setText("Learn");
+        Learn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LearnActionPerformed(evt);
+            }
+        });
+        modeMenu.add(Learn);
+
+        Quiz.setText("Quiz");
+        Quiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuizActionPerformed(evt);
+            }
+        });
+        modeMenu.add(Quiz);
+
+        MenuBar.add(modeMenu);
+
+        achievementMenu.setText("Achievements");
+        achievementMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                achievementMenuMouseClicked(evt);
+            }
+        });
+        MenuBar.add(achievementMenu);
+
+        setJMenuBar(MenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,13 +171,13 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addComponent(loginButton)
-                .addGap(47, 47, 47)
+                .addGap(51, 51, 51)
                 .addComponent(jLabel1)
                 .addGap(49, 49, 49)
                 .addComponent(learnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(quizButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         pack();
@@ -145,15 +213,49 @@ public class Main extends javax.swing.JFrame {
     private void quizButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizButtonActionPerformed
         Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
         user.setMode(quizMode); // Set Quiz mode
+        processModes(user.getMode()); // Display mode message
         new Quiz().setVisible(true); // Open quiz window
         this.setVisible(false); // Hide current window
-        processModes(user.getMode()); // Display mode message
     }//GEN-LAST:event_quizButtonActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         new Login().setVisible(true); // Open login window
         this.setVisible(false); // Hide current window
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void LearnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearnActionPerformed
+        Mode learnMode = new Learn(user.getUsername()); // Create Learn mode
+        user.setMode(learnMode); // Set learn mode
+        // Display mode message
+        processModes(user.getMode());
+        // Open the learning page for users and hide the current window
+        new learningPage(user.getUsername()).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LearnActionPerformed
+
+    private void QuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuizActionPerformed
+        Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
+        user.setMode(quizMode); // Set Quiz mode
+        new Quiz().setVisible(true); // Open quiz window
+        this.setVisible(false); // Hide current window
+        processModes(user.getMode()); // Display mode message
+    }//GEN-LAST:event_QuizActionPerformed
+
+    private void achievementMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_achievementMenuMouseClicked
+        // Get the current user in the session
+        User currentUser = UserSession.getInstance().getUser();
+        // Retrieve the list of unlocked achievements
+        List<Achievement> achievements = currentUser.getAchievements();
+        // Check if achievements exist
+        if (!achievements.isEmpty()) {
+            achievementBox.setText("All ahievements:\n");
+            // Loop through each achievement and display it in the text box
+            for (Achievement achievement : achievements) {
+                achievementBox.append(achievement.unlockAchievement() + "\n");
+            }
+        }
+        allAchievements.setVisible(true); // Make the achievements panel visible
+    }//GEN-LAST:event_achievementMenuMouseClicked
 
     /**
      * @param args the command line arguments
@@ -192,9 +294,18 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Learn;
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem Quiz;
+    private javax.swing.JTextArea achievementBox;
+    private javax.swing.JMenu achievementMenu;
+    private javax.swing.JFrame allAchievements;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton learnButton;
     private javax.swing.JButton loginButton;
+    private javax.swing.JMenu modeMenu;
     private javax.swing.JButton quizButton;
     // End of variables declaration//GEN-END:variables
 }

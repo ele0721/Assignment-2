@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -81,7 +82,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(108, 108, 108)
+                            .addGap(92, 92, 92)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
@@ -111,9 +112,9 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel2)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(59, 59, 59)
                 .addComponent(signUpbutton)
@@ -135,22 +136,34 @@ public class SignUp extends javax.swing.JFrame {
         } else {
             User newUser = new User(username, password);
             newUser.signUp();
-                // Create a specfic file for the user if it doesn't exist
+               try {
+                // Check if user exist
                 File userFile = new File(newUser.getBookmarkFile());
                 if (!userFile.exists()) {
+                    userFile.createNewFile(); // Create bookmark file for user
                     // Display a message confirming the signup was successful
                     message.setText("Sign up sucessfully!");
-                    message.setForeground(new java.awt.Color(51, 153, 255));
+                    message.setForeground(new java.awt.Color(102, 102, 102));
+                    UserSession.getInstance().setUser(newUser); // Store the current user in the session
+                    // Unlock sign up achievement and display message
+                    newUser.completeSignUp(); 
+                    JOptionPane.showMessageDialog(user, "🎉 Achievement Unlocked: Signed up successfully!");
+                    // Open the main window and close the current window
+                    new Main(username).setVisible(true);
+                    this.setVisible(false);
                 } else {
                     // Display error message
                     message.setText("Username Taken");
                     message.setForeground(new java.awt.Color(255, 51, 51));
                 }
+                }  catch (IOException e) {
+                    System.out.println("Error signing up: " + e.getMessage()); // Display message if error occur
+                }
         }
     }//GEN-LAST:event_signUpbuttonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // Open the Login frame and close the current frame
+        // Open the Login window and close the current window
         new Login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed

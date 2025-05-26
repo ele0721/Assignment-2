@@ -2,6 +2,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -17,12 +19,15 @@ public class User {
     private String password;
     private Mode mode;
     private static final String USER_FILE = "users.txt";
+    private List<Achievement> achievements;
+    boolean alreadyUnlocked = false;
 
     // Constructor
     public User(String username, String password){
         this.username = username;
         this.password = password;
         this.mode = null;
+        this.achievements = new ArrayList<>();
     }
 
     /**
@@ -58,7 +63,7 @@ public class User {
     }
 
     /**
-     * Store the user's username and password in the user file and create a personal bookmark file
+     * Store the user's username and password in the user file
      * @return True if sign-up is successful, false otherwise
      */
     public boolean signUp() {
@@ -66,7 +71,6 @@ public class User {
             PrintWriter writer = new PrintWriter(new FileWriter(USER_FILE, true)); // Open writer to append to USER_FILE
             writer.println(username + "," + password); // Store user's information
             writer.close();
-            new File(getBookmarkFile()).createNewFile(); // Create bookmark file for user
             return true;
         } catch (IOException e) {
             System.out.println("Error signing up: " + e.getMessage()); // Display message if an error occurs
@@ -104,5 +108,60 @@ public class User {
      */
     public String getBookmarkFile() {
         return "bookmark_" + username + ".txt";
+    }
+    
+    /**
+     * Retrieves the list of unlocked achievements.
+     * @return A list of achievements
+     */
+    public List<Achievement> getAchievements() {
+        return achievements;
+}
+    /**
+     * Add the daily login achievement.
+     */
+    public void unlockDailyLoginAchievement() {
+        achievements.add(new DailyLoginAchievement());
+    }
+
+    /**
+     * Add the lesson completion achievement if not already earned.
+     */
+    public void completeLesson() {
+        // Check if the lesson achievement already exists before adding it
+        for (Achievement achievement : achievements) {
+            if (achievement instanceof LessonCompletionAchievement) {
+                alreadyUnlocked = true;
+                break;
+            }
+        }
+        // If it's not already unlocked, add the achievement
+        if (!alreadyUnlocked) {
+        achievements.add(new LessonCompletionAchievement());
+        }
+    }
+
+    /**
+     * Add the quiz completion achievement if not already earned.
+     */
+    public void completeQuiz() {
+        // Check if the lesson achievement already exists before adding it
+        for (Achievement achievement : achievements) {
+            if (achievement instanceof QuizCompletionAchievement) {
+                alreadyUnlocked = true;
+                break;
+            }
+        }
+        // If it's not already unlocked, add the achievement
+        if (!alreadyUnlocked) {
+            achievements.add(new QuizCompletionAchievement());
+        }
+    }
+    
+    /**
+     * Add the sign up achievement.
+     */
+    public void completeSignUp() {
+        achievements.add(new SignUpAchievement());
     }
 }

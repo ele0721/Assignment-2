@@ -1,4 +1,5 @@
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -19,7 +20,6 @@ public class Leaderboard extends javax.swing.JFrame {
     
     public Leaderboard() {
         initComponents();
-        
         setLeaderboard leaderboard = setLeaderboard.getInstance();
         List<setLeaderboard.LeaderboardEntry> entries = leaderboard.getAllentries();
         
@@ -130,6 +130,6 @@ public class Leaderboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private static javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -123,6 +123,14 @@ public class Learn extends Mode{
     }
     
     /**
+     * Checks if the user has completed all learning sections.
+     * @return True if all sections are completed, false otherwise
+     */
+    public boolean isFinished() {
+        return index == 0;
+    }
+    
+    /**
      * Saves a bookmark at the current index with a given name.
      * @param name The name of the bookmark
      */

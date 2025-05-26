@@ -16,7 +16,7 @@ public class learningPage extends javax.swing.JFrame {
     private Learn learn;
     private Bookmark bookmark;
     private String username;
-
+    private User user;
     /**
      * Creates new form learningPage
      */
@@ -26,6 +26,7 @@ public class learningPage extends javax.swing.JFrame {
         this.username = username;
         this.learn = new Learn(username);
         this.bookmark = new Bookmark(username);
+        this.user = UserSession.getInstance().getUser();
         learn.loadInformation("informations.txt");
         learn.setIndex(0);
         textBox.setText(learn.getSection(0));
@@ -34,6 +35,7 @@ public class learningPage extends javax.swing.JFrame {
         loginButton.setVisible(false);
         // If user is in guest mode, disable bookmark feature
         if (username.equals("guest")){
+            MenuBar.setVisible(false);
             bookmarkButton.setVisible(false);
             saveButton1.setVisible(false);
             loginButton.setVisible(true);
@@ -56,6 +58,9 @@ public class learningPage extends javax.swing.JFrame {
         bookmarkNameField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         saveButton2 = new javax.swing.JButton();
+        allAchievements = new javax.swing.JFrame();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        achievementBox = new javax.swing.JTextArea();
         saveButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         textBox = new javax.swing.JTextPane();
@@ -63,9 +68,13 @@ public class learningPage extends javax.swing.JFrame {
         bookmarkButton = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
         loginButton = new javax.swing.JButton();
+        MenuBar = new javax.swing.JMenuBar();
+        modeMenu = new javax.swing.JMenu();
+        Learn = new javax.swing.JMenuItem();
+        Quiz = new javax.swing.JMenuItem();
+        achievementMenu = new javax.swing.JMenu();
 
         bookmarkFrame.setMinimumSize(new java.awt.Dimension(320, 110));
-        bookmarkFrame.setPreferredSize(new java.awt.Dimension(564, 200));
         bookmarkFrame.setSize(new java.awt.Dimension(564, 200));
 
         bookmarkComboBox.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -105,7 +114,6 @@ public class learningPage extends javax.swing.JFrame {
         );
 
         save.setMinimumSize(new java.awt.Dimension(307, 100));
-        save.setPreferredSize(new java.awt.Dimension(564, 200));
         save.setSize(new java.awt.Dimension(564, 200));
 
         bookmarkNameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -149,8 +157,33 @@ public class learningPage extends javax.swing.JFrame {
                 .addGap(53, 53, 53))
         );
 
+        allAchievements.setFocusCycleRoot(false);
+        allAchievements.setPreferredSize(new java.awt.Dimension(400, 300));
+        allAchievements.setSize(new java.awt.Dimension(400, 300));
+
+        achievementBox.setEditable(false);
+        achievementBox.setColumns(20);
+        achievementBox.setRows(5);
+        jScrollPane3.setViewportView(achievementBox);
+
+        javax.swing.GroupLayout allAchievementsLayout = new javax.swing.GroupLayout(allAchievements.getContentPane());
+        allAchievements.getContentPane().setLayout(allAchievementsLayout);
+        allAchievementsLayout.setHorizontalGroup(
+            allAchievementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allAchievementsLayout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
+        );
+        allAchievementsLayout.setVerticalGroup(
+            allAchievementsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allAchievementsLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(564, 703));
         setSize(new java.awt.Dimension(564, 703));
 
         saveButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -190,6 +223,38 @@ public class learningPage extends javax.swing.JFrame {
             }
         });
 
+        modeMenu.setText("Mode");
+        modeMenu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        modeMenu.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+
+        Learn.setText("Learn");
+        Learn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LearnActionPerformed(evt);
+            }
+        });
+        modeMenu.add(Learn);
+
+        Quiz.setText("Quiz");
+        Quiz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuizActionPerformed(evt);
+            }
+        });
+        modeMenu.add(Quiz);
+
+        MenuBar.add(modeMenu);
+
+        achievementMenu.setText("Achievements");
+        achievementMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                achievementMenuMouseClicked(evt);
+            }
+        });
+        MenuBar.add(achievementMenu);
+
+        setJMenuBar(MenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,7 +293,7 @@ public class learningPage extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(nextButton)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,8 +307,8 @@ public class learningPage extends javax.swing.JFrame {
         for (ActionListener listener : listeners) {
             bookmarkComboBox.removeActionListener(listener);
         }
+        
         bookmarkComboBox.removeAllItems(); // Clear existing items
-
         List<String[]> bookmarks = bookmark.loadBookmarks(); // Load saved bookmarks
         // Check and display message if no bookmarks exist
         if (bookmarks.isEmpty()) {   
@@ -272,6 +337,14 @@ public class learningPage extends javax.swing.JFrame {
         updateProgressBar(); // Update progress bar
         String section = learn.getNextSection(); // Get next learning section
         textBox.setText(section); // Display next section
+        // Unlock achievement when all lessons are completed
+        if (learn.isFinished()) {
+            user.completeLesson();
+            // Display message if user has not unlock the achievement
+            if (!user.alreadyUnlocked){
+                JOptionPane.showMessageDialog(textBox, "📖 Achievement Unlocked: Completed all lessons!");
+            }
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void bookmarkComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookmarkComboBoxActionPerformed
@@ -313,6 +386,37 @@ public class learningPage extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_loginButtonActionPerformed
 
+    private void LearnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LearnActionPerformed
+        Mode learnMode = new Learn(user.getUsername()); // Create learn mode
+        user.setMode(learnMode); // Set learn mode
+        // Open the learning page for users and hide the current window
+        new learningPage(user.getUsername()).setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_LearnActionPerformed
+
+    private void QuizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuizActionPerformed
+        Mode quizMode = new Quiz1(user.getUsername()); // Create Quiz mode
+        user.setMode(quizMode); // Set Quiz mode
+        new Quiz().setVisible(true); // Open quiz window
+        this.setVisible(false); // Hide current window
+    }//GEN-LAST:event_QuizActionPerformed
+
+    private void achievementMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_achievementMenuMouseClicked
+        // Get the current user in the session
+        User currentUser = UserSession.getInstance().getUser();
+        // Retrieve the list of unlocked achievements
+        List<Achievement> achievements = currentUser.getAchievements();
+        // Check if achievements exist
+        if (!achievements.isEmpty()) {
+            achievementBox.setText("All ahievements:\n");
+            // Loop through each achievement and display it in the text box
+            for (Achievement achievement : achievements) {
+                achievementBox.append(achievement.unlockAchievement() + "\n");
+            }
+        }
+        allAchievements.setVisible(true); // Make the achievements panel visible
+    }//GEN-LAST:event_achievementMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -348,13 +452,21 @@ public class learningPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Learn;
+    private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem Quiz;
+    private javax.swing.JTextArea achievementBox;
+    private javax.swing.JMenu achievementMenu;
+    private javax.swing.JFrame allAchievements;
     private javax.swing.JButton bookmarkButton;
     private javax.swing.JComboBox<String> bookmarkComboBox;
     private javax.swing.JFrame bookmarkFrame;
     private javax.swing.JTextField bookmarkNameField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton loginButton;
+    private javax.swing.JMenu modeMenu;
     private javax.swing.JButton nextButton;
     private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton removeButton;
