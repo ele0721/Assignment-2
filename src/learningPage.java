@@ -369,6 +369,7 @@ public class learningPage extends javax.swing.JFrame {
         if (!name.isEmpty()) { // Ensure name is not empty
             learn.addBookmark(name); // Save new bookmark
             updateBookmarkList(); // Update bookmark list
+            save.setVisible(false);
     }
     }//GEN-LAST:event_saveButton2ActionPerformed
 
